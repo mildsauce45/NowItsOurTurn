@@ -1,0 +1,1 @@
+https://gist.github.com/Jellybit/9f6182c25bceac06db31 -- See the MoveToPosition coroutine for a way I could handle my issue with the ResolveActionsState (also the camera itself is pretty cool).

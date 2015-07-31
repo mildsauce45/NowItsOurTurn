@@ -1,0 +1,5 @@
+﻿<weapons>
+  <weapon id="1" name="Honed Claws" power="4" magicPower="2" value="20"/>
+  <weapon id="2" name="Blorb Staff" power="2" magicPower="5" value="20"/>
+  <weapon id="3" name="Rusty Scythe" power="7" magicPower="0" value="20"/>
+</weapons>

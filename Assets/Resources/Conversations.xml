@@ -1,0 +1,14 @@
+<conversations>
+	<conversation name="merchant" speaker="merchant">
+		<line>Welcome to my humble shop.</line>
+		<line>This is the second line of text that I'm speaking.</line>
+		<choice>
+			What would you like to do?
+			<option confirm-branch="buy-option">Buy</option>
+			<option confirm-branch="sell-option">Sell</option>
+		</choice>
+		<line branch="buy-option">You chose to buy</line>
+		<line branch="sell-option">You chose to sell</line>
+		<line branch="sell-option">Just because this is a different branch</line>
+	</conversation>
+</conversations>
