@@ -50,9 +50,11 @@ namespace FirstWave.Niot.Battle
 
 			stateMachine.Configure(selectAbilityState).
 				OnEntry(OnSelectAbilityEnter).
-				OnExit(a => selectAbilityState.OnExit()).
+				OnExit(OnSelectAbilityExit).
 				Permit(PartyInputTriggers.ActionCanceled, selectActionState).
-				Permit(PartyInputTriggers.AbilitySelected, selectEnemyState);
+				//Permit(PartyInputTriggers.AbilitySelected, selectEnemyState);
+				PermitIf(PartyInputTriggers.AbilitySelected, selectEnemyState, IsAbilitySingleTarget).
+				PermitIf(PartyInputTriggers.AbilitySelected, selectActionState, IsAbilityMultiTarget);
 
 			stateMachine.Configure(selectEnemyState).
 				OnEntry(a => selectEnemyState.OnEnter()).
@@ -130,9 +132,7 @@ namespace FirstWave.Niot.Battle
 				if (transition.Trigger == PartyInputTriggers.AttackSelected)
 					controlFlow = PartyInputControlFlow.Attack;
 				else if (transition.Trigger == PartyInputTriggers.AbilitySelected)
-					controlFlow = PartyInputControlFlow.Ability;
-
-				Debug.Log("Control Flow: " + controlFlow);
+					controlFlow = PartyInputControlFlow.Ability;				
 
 				transition.Source.OnExit();
 			}
@@ -149,6 +149,35 @@ namespace FirstWave.Niot.Battle
 
 			// Now tell the state which party member we're setting up for
 			selectAbilityState.SetupAbilities(Commands.Count);
+		}
+
+		private void OnSelectAbilityExit(Transition<State<PartyInputTriggers>, PartyInputTriggers> transition)
+		{
+			selectAbilityState.OnExit();
+
+			if (selectAbilityState.SelectedAbility != null && selectAbilityState.SelectedAbility.TargetType == TargetTypes.All)
+			{
+				int partyMember = Commands.Count;
+
+				var command = new BattleCommand
+				{
+					Actor = this.Party[partyMember],
+					Ability = selectAbilityState.SelectedAbility,
+					Target = new Target { TargetType = TargetTypes.All }
+				};
+
+				Commands.Add(command);
+			}
+		}
+
+		private bool IsAbilitySingleTarget()
+		{
+			return selectAbilityState.SelectedAbility != null && selectAbilityState.SelectedAbility.TargetType == TargetTypes.Single;
+		}
+
+		private bool IsAbilityMultiTarget()
+		{
+			return selectAbilityState.SelectedAbility != null && selectAbilityState.SelectedAbility.TargetType == TargetTypes.All;
 		}
 
 		#endregion

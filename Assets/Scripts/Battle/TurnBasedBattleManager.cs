@@ -123,7 +123,7 @@ public class TurnBasedBattleManager : Singleton<TurnBasedBattleManager>
 		players[1] = new Player("Callsign Charlie", 999);
 		players[2] = new Player("Rasch", 999);
 
-		players[0].EquippedAbilities[0] = AbilityManager.Instance.GetAbility(1);
+		players[0].EquippedAbilities[0] = AbilityManager.Instance.GetAbility(2);
 		players[0].EquippedAbilities[1] = AbilityManager.Instance.GetAbility(8);
 		players[0].EquippedFinishers[0] = AbilityManager.Instance.GetAbility(9);
 		players[0].Speed = 6;

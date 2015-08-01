@@ -99,7 +99,7 @@ namespace FirstWave.Niot.Battle
 
 			ITargetable target = null;
 
-			if (command.Target.TargetType == TargetTypes.Single /* While we work on the engine, just treat these the same */)
+			if (command.Target.TargetType == TargetTypes.Single)
 			{
 				target = targets.FirstOrDefault(t => t == command.Target.TheTarget);
 
@@ -111,12 +111,20 @@ namespace FirstWave.Niot.Battle
 				{
 					var combatant = target as Combatant;
 
-					if (command.Ability.IsFinisher)
-						UseFinisher(command.Actor, command.Ability, combatant);
-					else
+					if (!command.Ability.IsFinisher || UseFinisher(command.Actor, command.Ability))
 						UseAbility(command.Actor, command.Ability, combatant);
 				}
-			}			
+			}
+			else if (command.Target.TargetType == TargetTypes.All)
+			{
+				if (!command.Ability.IsFinisher || UseFinisher(command.Actor, command.Ability))
+				{
+					this.messageBox.StartCoroutine(CreateMultiTargetCoroutine(command.Actor, command.Ability, targets));
+
+					if (command.Ability.Cooldown > 0)
+						command.Ability.CooldownRemaining = command.Ability.Cooldown + 1;
+				}
+			}
 
 			if (command.Actor is Player)
 			{
@@ -128,7 +136,7 @@ namespace FirstWave.Niot.Battle
 			}
 		}
 
-		private void UseFinisher(Combatant actor, Ability finisher, Combatant target)
+		private bool UseFinisher(Combatant actor, Ability finisher)
 		{
 			var f = finisher as Finisher;
 
@@ -150,12 +158,13 @@ namespace FirstWave.Niot.Battle
 				// Now we need to collapse the field effect array down;
 				TurnBasedBattleManager.Instance.SetFieldEffect(TurnBasedBattleManager.Instance.FieldEffect.Where(e => e != ElementType.None).ToArray());
 
-				// The rest of the code should be exactly like using a regular ability
-				UseAbility(actor, finisher, target);
+				return true;
 			}
 			else
 			{
 				this.messageBox.StartCoroutine(CreateFailedFinisherCoroutine(actor));
+
+				return false;
 			}
 		}
 
@@ -166,7 +175,7 @@ namespace FirstWave.Niot.Battle
 
 			// Add in the cooldown if we need to, with a plus one because we're going to deduct one now from the cooldown remaining for all abilities for this person
 			if (ability.Cooldown > 0)
-				ability.CooldownRemaining = ability.Cooldown + 1;			
+				ability.CooldownRemaining = ability.Cooldown + 1;
 
 			messageBox.StartCoroutine(CreateSingleTargetCoroutine(actor, target, ability));
 		}
@@ -201,11 +210,18 @@ namespace FirstWave.Niot.Battle
 
 		private IEnumerator CreateSingleTargetCoroutine(Combatant actor, Combatant target, Ability ability)
 		{
+			SetNewTextOnTimer(string.Format("{0} uses {1} on {2}.", actor.Name, ability.Name, target.Name));
+
+			while (!textTimer.IsComplete)
+				yield return new WaitForSeconds(messageBox.characterDelay);
+
+			yield return new WaitForSeconds(delayTimer);
+
 			int damage = CombatMathHelper.GetDamageForAbility(actor, ability, target);
 
 			if (damage <= 0)
 			{
-				SetNewTextOnTimer(string.Format("A miss! {0} does no damage to {1}", actor.Name, target.Name));
+				SetNewTextOnTimer(string.Format("A miss! {0} does no damage to {1}.", actor.Name, target.Name));
 
 				while (!textTimer.IsComplete)
 					yield return new WaitForSeconds(messageBox.characterDelay);
@@ -214,13 +230,6 @@ namespace FirstWave.Niot.Battle
 			}
 			else
 			{
-				SetNewTextOnTimer(string.Format("{0} uses {1} on {2}.", actor.Name, ability.Name, target.Name, damage));
-
-				while (!textTimer.IsComplete)
-					yield return new WaitForSeconds(messageBox.characterDelay);
-
-				yield return new WaitForSeconds(delayTimer);
-
 				// Play a sound effect and/or a visual cue that something happened
 
 				SetNewTextOnTimer(string.Format("{0} takes {1} damage.", target.Name, damage));
@@ -237,6 +246,46 @@ namespace FirstWave.Niot.Battle
 				if (target.IsDead)
 				{
 					SetNewTextOnTimer(string.Format("{0} dies!", target.Name));
+
+					while (!textTimer.IsComplete)
+						yield return new WaitForSeconds(messageBox.characterDelay);
+
+					yield return new WaitForSeconds(delayTimer);
+				}
+			}
+
+			proceed = true;
+		}
+
+		private IEnumerator CreateMultiTargetCoroutine(Combatant actor, Ability ability, IEnumerable<ITargetable> targets)
+		{
+			SetNewTextOnTimer(string.Format("{0} uses {1}.", actor.Name, ability.Name));
+
+			while (!textTimer.IsComplete)
+				yield return new WaitForSeconds(messageBox.characterDelay);
+
+			yield return new WaitForSeconds(0.5f);
+
+			// Play a sound effect and/or visual cue that something happened
+
+			var livingEnemies = targets.Where(p => !p.IsDead).OfType<Combatant>();
+
+			foreach (var le in livingEnemies)
+			{
+				int damage = CombatMathHelper.GetDamageForAbility(actor, ability, le);
+
+				SetNewTextOnTimer(string.Format("{0} takes {1} damage.", le.Name, damage));
+
+				while (!textTimer.IsComplete)
+					yield return new WaitForSeconds(messageBox.characterDelay);
+
+				yield return new WaitForSeconds(delayTimer);
+
+				le.CurrentHP -= damage;
+
+				if (le.IsDead)
+				{
+					SetNewTextOnTimer(string.Format("{0} dies!", le.Name));
 
 					while (!textTimer.IsComplete)
 						yield return new WaitForSeconds(messageBox.characterDelay);
