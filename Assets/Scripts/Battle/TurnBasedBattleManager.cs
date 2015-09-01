@@ -33,6 +33,7 @@ public class TurnBasedBattleManager : Singleton<TurnBasedBattleManager>
 		var getInputState = new GetPartyInputState(GetPlayerInputUI);
 		var getEnemyInputState = new GetEnemyInputState(combatants.Item1, combatants.Item2, this.gameObject);
 		var resolveState = new ResolveActionsState(ResolveActionUI);
+		var endCombatState = new EndCombatState(this.gameObject);
 
 		stateMachine = new StateMachine<State<TurnBasedBattleTriggers?>, TurnBasedBattleTriggers>(initialState);
 
@@ -53,7 +54,7 @@ public class TurnBasedBattleManager : Singleton<TurnBasedBattleManager>
 			OnEntry(a => { resolveState.Commands = CombatMathHelper.OrderCommandsBySpeed(getInputState.Commands.Concat(getEnemyInputState.Commands)); resolveState.OnEnter(); }).
 			OnExit(a => resolveState.OnExit()).
 			Permit(TurnBasedBattleTriggers.CombatContinues, getInputState).
-			Permit(TurnBasedBattleTriggers.EnemyKilled, null).
+			Permit(TurnBasedBattleTriggers.EnemyKilled, endCombatState).
 			Permit(TurnBasedBattleTriggers.PlayerKilled, null);
 
 		// Now call OnEnter in the initial state

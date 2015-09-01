@@ -28,8 +28,6 @@ namespace FirstWave.Niot.Battle
 
 		public static int GetDamageForAbility(Combatant actor, Ability ability, Combatant target)
 		{
-			int baseDamageMultiplier = ability.BasePower;
-
 			int modifier = ability.AbilityType == AbilityType.Physical ? actor.AttackPower : actor.MagicPower;
 
 			modifier = GetEffectiveAttributeValue(modifier, 0.2f);
@@ -37,12 +35,9 @@ namespace FirstWave.Niot.Battle
 			// For now magic damage is not reducible, this will change in the very near future
 			int damageReduction = ability.AbilityType == AbilityType.Physical ? target.Defense : 0;
 
-			int baseDamage = (baseDamageMultiplier * modifier) - damageReduction;
+			int damage = Random.Range(ability.DamageRange.Item1, ability.DamageRange.Item2) + modifier - damageReduction;
 
-			if (baseDamage < 0)
-				baseDamage = 0;
-
-			return baseDamage;
+			return damage;
 		}
 
 		private static int GetEffectiveAttributeValue(int attributeValue, float variance)

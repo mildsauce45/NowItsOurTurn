@@ -37,24 +37,14 @@ namespace FirstWave.Niot.Battle
 		public override TurnBasedBattleTriggers? GetTrigger()
 		{
 			if (Commands.Count == Enemies.Count(e => !e.IsDead))
-				return TurnBasedBattleTriggers.EnemyActionDecided;
+				return TurnBasedBattleTriggers.EnemyActionDecided;			
 
 			return null;
 		}
 
 		private void CreateCommand(Enemy actor)
 		{
-			// Basic behavior: randomly attack a party member
-			var target = Party[Random.Range(0, Party.Length)];
-
-			var command = new BattleCommand 
-			{
-				Actor = actor, 
-				Ability = new Ability { Name = "Sword Swipe" }, 
-				Target = new Target { TargetType = TargetTypes.Single, TheTarget = target } 
-			};
-
-			Commands.Add(command);
+			Commands.Add(actor.Behavior.GetNextAction(Party, Enemies, TurnBasedBattleManager.Instance.FieldEffect));
 		}
 	}
 }

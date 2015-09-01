@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using FirstWave.Niot.Managers;
+using UnityEngine;
 
 public class Water : Impassable {
 

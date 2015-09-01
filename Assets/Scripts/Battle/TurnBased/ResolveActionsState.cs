@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using FirstWave.Core;
+using FirstWave.Core.Audio;
 using FirstWave.Core.GUI;
 using FirstWave.Niot.Abilities;
 using FirstWave.Niot.Game;
@@ -20,7 +21,10 @@ namespace FirstWave.Niot.Battle
 		public float delayTimer = 0.75f;
 
 		private MessageBox messageBox;
+		private AudioSource audioSource;
+
 		private TextDisplayTimer textTimer;
+		private AudioTimer audioTimer;
 
 		private bool proceed = true;
 
@@ -31,6 +35,9 @@ namespace FirstWave.Niot.Battle
 			Enemies = TurnBasedBattleManager.Instance.EnemyParty;
 
 			this.messageBox = owner.GetComponent<MessageBox>();
+			this.audioSource = owner.GetComponent<AudioSource>();
+
+			this.audioTimer = new AudioTimer(this.audioSource);
 		}
 
 		public override void Update()
@@ -46,7 +53,7 @@ namespace FirstWave.Niot.Battle
 				if (Commands.Any())
 				{
 					var command = Commands.First();
-					Commands.RemoveAt(0);
+					//Commands.RemoveAt(0);
 
 					proceed = false;
 
@@ -72,6 +79,7 @@ namespace FirstWave.Niot.Battle
 			else if (!Commands.Any())
 				return TurnBasedBattleTriggers.CombatContinues;
 
+			Debug.Log("here");
 			return null;
 		}
 
@@ -194,6 +202,13 @@ namespace FirstWave.Niot.Battle
 			textTimer.Start();
 		}
 
+		private void ProceedToNextCommand()
+		{
+			Commands.RemoveAt(0);
+
+			proceed = true;
+		}
+
 		#region Coroutines
 
 		private IEnumerator CreateFailedFinisherCoroutine(Combatant actor)
@@ -205,7 +220,7 @@ namespace FirstWave.Niot.Battle
 
 			yield return new WaitForSeconds(delayTimer);
 
-			proceed = true;
+			ProceedToNextCommand();
 		}
 
 		private IEnumerator CreateSingleTargetCoroutine(Combatant actor, Combatant target, Ability ability)
@@ -230,7 +245,13 @@ namespace FirstWave.Niot.Battle
 			}
 			else
 			{
-				// Play a sound effect and/or a visual cue that something happened
+				if (ability.AudioClip != null)
+				{
+					audioTimer.SetAudioClip(ability.AudioClip);
+					audioTimer.Start();
+
+					yield return new WaitForSeconds(ability.AudioClip.length);
+				}
 
 				SetNewTextOnTimer(string.Format("{0} takes {1} damage.", target.Name, damage));
 
@@ -254,7 +275,7 @@ namespace FirstWave.Niot.Battle
 				}
 			}
 
-			proceed = true;
+			ProceedToNextCommand();
 		}
 
 		private IEnumerator CreateMultiTargetCoroutine(Combatant actor, Ability ability, IEnumerable<ITargetable> targets)
@@ -294,7 +315,7 @@ namespace FirstWave.Niot.Battle
 				}
 			}
 
-			proceed = true;
+			ProceedToNextCommand();
 		}
 
 		#endregion

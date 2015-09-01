@@ -15,7 +15,10 @@ namespace FirstWave.Niot.Game
 
 		public abstract int AttackPower { get; }
 		public abstract int MagicPower { get; }
-		public abstract int Defense { get; }
+		public abstract int Defense { get; }		
+
+		public Ability[] EquippedAbilities { get; set; }
+		public Ability[] EquippedFinishers { get; set; }
 
 		public bool IsDead
 		{

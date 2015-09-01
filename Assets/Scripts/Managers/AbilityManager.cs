@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
+using FirstWave.Core;
 using FirstWave.Core.Extensions;
 using FirstWave.Niot.Abilities;
 using UnityEngine;
@@ -19,6 +20,18 @@ namespace FirstWave.Niot.Game.Managers
 
 			if (allAbilities.ContainsKey(abilityId))
 				return allAbilities[abilityId].Clone();
+
+			return null;
+		}
+
+		public Ability GetAbility(string name)
+		{
+			if (allAbilities == null || allAbilities.Count == 0)
+				InitializeAbilities();
+
+			var matchingAbility = allAbilities.Values.FirstOrDefault(a => a.Name == name);
+			if (matchingAbility != null)
+				return matchingAbility.Clone();
 
 			return null;
 		}
@@ -45,6 +58,9 @@ namespace FirstWave.Niot.Game.Managers
 				if (ability != null)
 					allAbilities.Add(ability.Id, ability);
 			}
+
+			// Initialize the Attack ability
+			Ability.ATTACK.AudioClip = Resources.Load("SoundEffects/SwordSwing") as AudioClip;
 		}
 
 		private Ability CreateRegularAbility(XmlNode abilityNode)
@@ -74,6 +90,11 @@ namespace FirstWave.Niot.Game.Managers
 					ability.Icon = icon;
 			}
 
+			ability.DamageRange = ParseDamageRange(abilityNode);
+
+			var clip = Resources.Load("SoundEffects/SwordSwing") as AudioClip;
+			ability.AudioClip = clip;
+
 			return ability;
 		}
 
@@ -97,6 +118,18 @@ namespace FirstWave.Niot.Game.Managers
 			}
 
 			return CreateRegularAbility(abilityNode, ability);
+		}
+
+		private Tuple<int, int> ParseDamageRange(XmlNode node)
+		{
+			var rangeNode = node.ChildNodes.OfType<XmlNode>().FirstOrDefault(x => x.Name == "range");
+			if (rangeNode == null)
+				return Tuple.Create(0, 0);
+
+			var low = rangeNode.FirstChild.InnerText.ToInt();
+			var high = rangeNode.LastChild.InnerText.ToInt();
+
+			return Tuple.Create(low, high);
 		}
 	}
 }

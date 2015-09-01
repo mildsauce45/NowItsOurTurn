@@ -2,15 +2,12 @@
 {
 	public class Player : Combatant
 	{
-		public Ability[] AllAbilities { get; set; }
-
-		public Ability[] EquippedAbilities { get; set; }
-		public Ability[] EquippedFinishers { get; set; }
-
 		public Weapon Weapon { get; set; }
 
 		public Armor Head { get; set; }
 		public Armor Chestpiece { get; set; }
+
+		public Ability[] AllAbilities { get; set; }
 
 		public override int AttackPower
 		{

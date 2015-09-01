@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using FirstWave.Niot.Managers;
 
 public class TileBoatController : MonoBehaviour {
 
