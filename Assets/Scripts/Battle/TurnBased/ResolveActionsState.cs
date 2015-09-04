@@ -53,7 +53,6 @@ namespace FirstWave.Niot.Battle
 				if (Commands.Any())
 				{
 					var command = Commands.First();
-					//Commands.RemoveAt(0);
 
 					proceed = false;
 
@@ -79,7 +78,6 @@ namespace FirstWave.Niot.Battle
 			else if (!Commands.Any())
 				return TurnBasedBattleTriggers.CombatContinues;
 
-			Debug.Log("here");
 			return null;
 		}
 
@@ -96,7 +94,10 @@ namespace FirstWave.Niot.Battle
 		private void ResolveAction(BattleCommand command)
 		{
 			if (command == null || command.Actor.IsDead)
+			{
+				ProceedToNextCommand();
 				return;
+			}
 
 			IEnumerable<ITargetable> targets = null;
 
@@ -125,8 +126,17 @@ namespace FirstWave.Niot.Battle
 			}
 			else if (command.Target.TargetType == TargetTypes.All)
 			{
+				if (targets.OfType<Combatant>().All(c => c.IsDead))
+				{
+					ProceedToNextCommand();
+					return;
+				}
+
 				if (!command.Ability.IsFinisher || UseFinisher(command.Actor, command.Ability))
 				{
+					if (command.Ability.ElementType != ElementType.None)
+						TurnBasedBattleManager.Instance.AddFieldEffect(command.Ability.ElementType);
+
 					this.messageBox.StartCoroutine(CreateMultiTargetCoroutine(command.Actor, command.Ability, targets));
 
 					if (command.Ability.Cooldown > 0)
@@ -134,13 +144,10 @@ namespace FirstWave.Niot.Battle
 				}
 			}
 
-			if (command.Actor is Player)
+			foreach (var ability in (command.Actor as Combatant).EquippedAbilities)
 			{
-				foreach (var ability in (command.Actor as Player).EquippedAbilities)
-				{
-					if (ability != null && ability.Cooldown > 0 && ability.CooldownRemaining > 0)
-						ability.CooldownRemaining--;
-				}
+				if (ability != null && ability.Cooldown > 0 && ability.CooldownRemaining > 0)
+					ability.CooldownRemaining--;
 			}
 		}
 
@@ -280,38 +287,41 @@ namespace FirstWave.Niot.Battle
 
 		private IEnumerator CreateMultiTargetCoroutine(Combatant actor, Ability ability, IEnumerable<ITargetable> targets)
 		{
-			SetNewTextOnTimer(string.Format("{0} uses {1}.", actor.Name, ability.Name));
-
-			while (!textTimer.IsComplete)
-				yield return new WaitForSeconds(messageBox.characterDelay);
-
-			yield return new WaitForSeconds(0.5f);
-
 			// Play a sound effect and/or visual cue that something happened
 
 			var livingEnemies = targets.Where(p => !p.IsDead).OfType<Combatant>();
 
-			foreach (var le in livingEnemies)
+			if (livingEnemies.Any())
 			{
-				int damage = CombatMathHelper.GetDamageForAbility(actor, ability, le);
-
-				SetNewTextOnTimer(string.Format("{0} takes {1} damage.", le.Name, damage));
+				SetNewTextOnTimer(string.Format("{0} uses {1}.", actor.Name, ability.Name));
 
 				while (!textTimer.IsComplete)
 					yield return new WaitForSeconds(messageBox.characterDelay);
 
-				yield return new WaitForSeconds(delayTimer);
+				yield return new WaitForSeconds(0.5f);
 
-				le.CurrentHP -= damage;
-
-				if (le.IsDead)
+				foreach (var le in livingEnemies)
 				{
-					SetNewTextOnTimer(string.Format("{0} dies!", le.Name));
+					int damage = CombatMathHelper.GetDamageForAbility(actor, ability, le);
+
+					SetNewTextOnTimer(string.Format("{0} takes {1} damage.", le.Name, damage));
 
 					while (!textTimer.IsComplete)
 						yield return new WaitForSeconds(messageBox.characterDelay);
 
 					yield return new WaitForSeconds(delayTimer);
+
+					le.CurrentHP -= damage;
+
+					if (le.IsDead)
+					{
+						SetNewTextOnTimer(string.Format("{0} dies!", le.Name));
+
+						while (!textTimer.IsComplete)
+							yield return new WaitForSeconds(messageBox.characterDelay);
+
+						yield return new WaitForSeconds(delayTimer);
+					}
 				}
 			}
 

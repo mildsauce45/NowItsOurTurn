@@ -141,6 +141,8 @@
      <Compile Include="Assets\Scripts\Managers\WeaponManager.cs" />
      <Compile Include="Assets\Scripts\Objects\Boat.cs" />
      <Compile Include="Assets\Scripts\Objects\FireParticleSystem.cs" />
+     <Compile Include="Assets\Scripts\Tiles\DirectionalImpassable.cs" />
+     <Compile Include="Assets\Scripts\Tiles\Directions.cs" />
      <Compile Include="Assets\Scripts\Tiles\Impassable.cs" />
      <Compile Include="Assets\Scripts\Tiles\MapManager.cs" />
      <Compile Include="Assets\Scripts\Tiles\SceneLoader.cs" />

@@ -52,7 +52,6 @@ namespace FirstWave.Niot.Battle
 				OnEntry(OnSelectAbilityEnter).
 				OnExit(OnSelectAbilityExit).
 				Permit(PartyInputTriggers.ActionCanceled, selectActionState).
-				//Permit(PartyInputTriggers.AbilitySelected, selectEnemyState);
 				PermitIf(PartyInputTriggers.AbilitySelected, selectEnemyState, IsAbilitySingleTarget).
 				PermitIf(PartyInputTriggers.AbilitySelected, selectActionState, IsAbilityMultiTarget);
 

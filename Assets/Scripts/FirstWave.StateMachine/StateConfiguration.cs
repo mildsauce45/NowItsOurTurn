@@ -5,14 +5,12 @@ namespace FirstWave.StateMachine
 	public class StateConfiguration<TState, TTrigger>
 	{
 		private readonly StateRepresentation<TState, TTrigger> representation;
-		//private readonly Func<TState, StateRepresentation<TState, TTrigger>> lookup;
 
 		private static readonly Func<bool> NoGuard = () => true;
 
-		internal StateConfiguration(StateRepresentation<TState, TTrigger> representation, Func<TState, StateRepresentation<TState, TTrigger>> lookup)
+		internal StateConfiguration(StateRepresentation<TState, TTrigger> representation)
 		{
 			this.representation = representation;
-			//this.lookup = lookup;
 		}
 
 		public StateConfiguration<TState, TTrigger> Permit(TTrigger trigger, TState destination)
@@ -56,7 +54,7 @@ namespace FirstWave.StateMachine
 		}
 
 		public StateConfiguration<TState, TTrigger> OnEntryFrom(TTrigger trigger, Action entryAction)
-		{			
+		{
 			return OnEntryFrom(trigger, t => entryAction());
 		}
 

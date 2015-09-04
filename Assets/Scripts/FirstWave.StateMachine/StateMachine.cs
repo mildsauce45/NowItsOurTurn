@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace FirstWave.StateMachine
@@ -8,8 +6,7 @@ namespace FirstWave.StateMachine
 	public class StateMachine<TState, TTrigger>
 	{
 		private readonly IDictionary<TState, StateRepresentation<TState, TTrigger>> stateConfiguration = new Dictionary<TState, StateRepresentation<TState, TTrigger>>();
-		//private readonly IDictionary<TTrigger, TriggerWithParameters>
-
+		
 		private readonly Func<TState> stateAccessor;
 		private readonly Action<TState> stateMutator;
 
@@ -52,7 +49,7 @@ namespace FirstWave.StateMachine
 
 		public StateConfiguration<TState, TTrigger> Configure(TState state)
 		{
-			return new StateConfiguration<TState, TTrigger>(GetRepresentation(state), GetRepresentation);
+			return new StateConfiguration<TState, TTrigger>(GetRepresentation(state));
 		}
 
 		public void Fire(TTrigger trigger)

@@ -76,7 +76,7 @@ public class TileBoatController : MonoBehaviour {
 			if (mapManager.Impassables.ContainsKey(target))
 			{
 				Impassable i = mapManager.Impassables[target];
-				if (!i.Contingent || !i.CanPass())
+				if (!i.Contingent || !i.CanPass(transform))
 				{
 					target = Vector3.zero;
 					return;

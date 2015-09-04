@@ -36,7 +36,15 @@ namespace FirstWave.Niot.Managers
 			var impassables = FindObjectsOfType<Impassable>();
 
 			foreach (var i in impassables)
+			{
+				if (Impassables.ContainsKey(i.gameObject.transform.position))
+				{
+					Debug.Log("A duplicate tile exists at " + i.gameObject.transform.position + ": " + i.gameObject.name);
+					continue;
+				}
+
 				Impassables.Add(i.gameObject.transform.position, i);
+			}
 
 			var sceneLoaders = FindObjectsOfType<SceneLoader>();
 
