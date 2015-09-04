@@ -22,7 +22,7 @@ namespace FirstWave.Niot.Battle
 		public override void Update()
 		{
 			// Display some message regarding the new XP, gold, and perhaps levels the players have now
-			Application.LoadLevel(BattleTransitionManager.Instance.sceneToLoad);
+			Application.LoadLevel(TransitionManager.Instance.sceneToLoad);
 		}
 
 		public override TurnBasedBattleTriggers? GetTrigger()

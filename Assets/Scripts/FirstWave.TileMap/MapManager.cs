@@ -1,28 +1,35 @@
 ﻿using System.Collections.Generic;
+using FirstWave.TileMap;
 using UnityEngine;
 
 namespace FirstWave.Niot.Managers
 {
 	public class MapManager : MonoBehaviour
 	{
-
 		public IDictionary<Vector3, Impassable> Impassables { get; private set; }
 		public IDictionary<Vector3, SceneLoader> SceneLoaders { get; private set; }
 		public IDictionary<Vector3, Interactable> Interactables { get; private set; }
 
 		public Boat Boat { get; private set; }
 
-		public string sceneName;
+		public string sceneName;		
 		public float encounterChance;
+
+		public string exitToScene;
+		public Vector2 exitToCoordinates;
 
 		void Awake()
 		{
-			BattleTransitionManager.Instance.sceneToLoad = sceneName;
+			TransitionManager.Instance.sceneToLoad = sceneName;
 
-			if (BattleTransitionManager.Instance.playerPosition.HasValue)
+			if (TransitionManager.Instance.playerPosition.HasValue)
 			{
-				FindObjectOfType<TiledHeroController>().transform.position = BattleTransitionManager.Instance.playerPosition.Value;
-				BattleTransitionManager.Instance.playerPosition = null;
+				var thc = FindObjectOfType<TiledHeroController>();
+
+				thc.transform.position = TransitionManager.Instance.playerPosition.Value;
+				thc.SetDirection(TransitionManager.Instance.direction);
+
+				TransitionManager.Instance.playerPosition = null;
 			}
 		}
 

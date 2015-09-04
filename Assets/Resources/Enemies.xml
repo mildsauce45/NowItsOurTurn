@@ -1,11 +1,11 @@
 <enemies>
-  <enemy name="Metal Slime" hp="10" speed="10" strength="5" will="4" endurance="30" texture="MetalSlime" xp="1024" gold="200" behavior="AllOut">
+  <enemy name="Metal Slime" hp="1" speed="10" strength="5" will="4" endurance="30" texture="MetalSlime" xp="1024" gold="200" behavior="AllOut">
     <abilities>
       <ability name="Fireball"/>
     </abilities>
   </enemy>
   
-  <enemy name="Balrog" hp="30" speed="4" strength="10" will="6" endurance="25" texture="Balrog" xp="100" gold="50" behavior="KillTheWeakest">
+  <enemy name="Balrog" hp="1" speed="4" strength="10" will="6" endurance="25" texture="Balrog" xp="100" gold="50" behavior="KillTheWeakest">
     <abilities>
       <ability name="Fireball"/>
       <ability name="Shadow Blade"/>
@@ -13,7 +13,7 @@
     </abilities>
   </enemy>
 
-  <enemy name="Farmer" hp="15" speed="7" strength="3" will="2" endurance="5" texture="Farmer" xp="5" gold="5" behavior="AllOut">
+  <enemy name="Farmer" hp="1" speed="7" strength="3" will="2" endurance="5" texture="Farmer" xp="5" gold="5" behavior="AllOut">
     <abilities>
       <ability name="Press the Advantage"/>
     </abilities>

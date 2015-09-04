@@ -59,10 +59,9 @@ namespace FirstWave.Niot.Battle
 					ResolveAction(command);
 				}
 			}
-			else if (!proceed && textTimer != null)
-			{
+
+			if (textTimer != null)
 				textTimer.Update();
-			}
 		}
 
 		public override TurnBasedBattleTriggers? GetTrigger()

@@ -1,6 +1,6 @@
-﻿using UnityEngine;
-using System.Collections;
-using FirstWave.Niot.Managers;
+﻿using FirstWave.Niot.Managers;
+using FirstWave.TileMap;
+using UnityEngine;
 
 public class TiledHeroController : MonoBehaviour
 {
@@ -17,7 +17,6 @@ public class TiledHeroController : MonoBehaviour
 	private InputManager inputManager;
 	private Animator anim;
 
-	// Use this for initialization
 	void Start()
 	{
 		target = transform.position;
@@ -28,7 +27,6 @@ public class TiledHeroController : MonoBehaviour
 		anim = GetComponent<Animator>();
 	}
 
-	// Update is called once per frame
 	void Update()
 	{
 		if (inputManager.DisableCharacterMotor)
@@ -38,6 +36,34 @@ public class TiledHeroController : MonoBehaviour
 			HandleInteraction();
 		else
 			MyMovement();
+	}
+
+	public void SetDirection(Directions direction)
+	{
+		float x = 0f;
+		float y = 0f;
+
+		switch (direction)
+		{
+			case Directions.Up:
+				y = 1f;
+				break;
+			case Directions.Down:
+				y = -1f;
+				break;
+			case Directions.Left:
+				x = -1f;
+				break;
+			case Directions.Right:
+				x = 1f;
+				break;
+		}
+
+		if (anim != null)
+		{
+			anim.SetFloat("InputX", x);
+			anim.SetFloat("InputY", y);
+		}
 	}
 
 	private void MyMovement()
@@ -57,7 +83,7 @@ public class TiledHeroController : MonoBehaviour
 
 				if (mapManager.encounterChance > 0 && Random.Range(0, 100) <= mapManager.encounterChance)
 				{
-					BattleTransitionManager.Instance.playerPosition = target;
+					TransitionManager.Instance.playerPosition = target;
 					Application.LoadLevel("TurnBasedBattle");
 				}
 			}
@@ -93,9 +119,18 @@ public class TiledHeroController : MonoBehaviour
 
 			// First do some bounds checking
 			if (target.x < 0 || target.y < 0 || target.x > MaxCoordinates.x || target.y > MaxCoordinates.y)
+			{
+				if (!string.IsNullOrEmpty(mapManager.exitToScene))
+				{
+					TransitionManager.Instance.playerPosition = mapManager.exitToCoordinates;
+					Application.LoadLevel(mapManager.exitToScene);
+				}
+
 				return;
+			}
 			
 			// Check to see if the target tile can be moved onto
+			
 			if (mapManager.Impassables.ContainsKey(target))
 			{
 				Impassable i = mapManager.Impassables[target];
@@ -113,7 +148,11 @@ public class TiledHeroController : MonoBehaviour
 		{
 			SceneLoader sl = mapManager.SceneLoaders[transform.position];
 			if (sl != null)
+			{
+				TransitionManager.Instance.playerPosition = sl.StartCoordinates;
+
 				Application.LoadLevel(sl.Scene);
+			}
 		}
 	}
 

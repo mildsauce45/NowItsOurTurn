@@ -1,6 +1,6 @@
-﻿using UnityEngine;
-using System.Collections;
-using FirstWave.Niot.Managers;
+﻿using FirstWave.Niot.Managers;
+using FirstWave.TileMap;
+using UnityEngine;
 
 public class TileBoatController : MonoBehaviour {
 

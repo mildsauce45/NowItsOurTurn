@@ -3,7 +3,7 @@
 namespace FirstWave.Core
 {
 	public class TextDisplayTimer : Timer, ITextSource
-	{		
+	{
 		public string FullText { get; set; }
 
 		public string Text
@@ -31,17 +31,17 @@ namespace FirstWave.Core
 		public TextDisplayTimer(float characterDelay, string text)
 			: base(characterDelay)
 		{
-			FullText = text;			
+			FullText = text;
 
 			characterDisplayPassedTime = 0;
-		}		
+		}
 
 		public override void Update()
 		{
-			characterDisplayPassedTime += Time.deltaTime;			
-
 			if (!Enabled)
 				return;
+
+			characterDisplayPassedTime += Time.deltaTime;
 
 			base.Update();
 		}
@@ -62,7 +62,7 @@ namespace FirstWave.Core
 
 		private void WriteText()
 		{
-			Debug.Log(Text.Substring(0, GetNumCharactersToDisplay()));			
+			Debug.Log(Text.Substring(0, GetNumCharactersToDisplay()));
 		}
 	}
 }
