@@ -43,9 +43,6 @@ namespace FirstWave.Niot.Game
 			var behaviorType = typeof(IEnemyBehavior);
 
 			ENEMY_BEHAVIORS = Assembly.GetExecutingAssembly().GetTypes().Where(t => behaviorType.IsAssignableFrom(t) && t != behaviorType).ToList();
-
-			foreach (var eb in ENEMY_BEHAVIORS)
-				Debug.Log(eb.Name);
 		}
 
 		public Enemy(string name, int maxHP)
@@ -81,16 +78,11 @@ namespace FirstWave.Niot.Game
 
 		private void CreateBehavior()
 		{
-			Debug.Log("Creating behavior: " + BehaviorType);
-
 			if (!string.IsNullOrEmpty(BehaviorType))
 			{
 				var type = ENEMY_BEHAVIORS.FirstOrDefault(t => t.Name == (BehaviorType + "Behavior"));
 				if (type != null)
-				{
 					this.Behavior = Activator.CreateInstance(type, new[] { this }) as IEnemyBehavior;
-					Debug.Log(this.Behavior);
-				}
 			}
 		}
 	}

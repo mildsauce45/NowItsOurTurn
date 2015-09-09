@@ -1,88 +1,106 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Xml;
 using FirstWave.Core.Extensions;
+using FirstWave.Xml;
+using FirstWave.Xml.Documents;
 using UnityEngine;
 
 namespace FirstWave.Niot.Game.Managers
 {
-    public class EnemyManager : Singleton<EnemyManager>
-    {
-        private IDictionary<string, Enemy> allEnemies;
+	public class EnemyManager
+	{
+		private static EnemyManager me;
+		public static EnemyManager Instance
+		{
+			get
+			{
+				if (me == null)
+					me = new EnemyManager();
 
-        public Enemy GetEnemy(string name)
-        {
-            if (allEnemies == null || allEnemies.Count == 0)
-                InitializeEnemies();
+				return me;
+			}
+		}
 
-            if (allEnemies.ContainsKey(name))
+		private IDictionary<string, Enemy> allEnemies;
+
+		private EnemyManager()
+		{
+		}
+
+		public Enemy GetEnemy(string name)
+		{
+			if (allEnemies == null || allEnemies.Count == 0)
+				InitializeEnemies();
+
+			if (allEnemies.ContainsKey(name))
 				// Clone the stock implementation and return it
-                return new Enemy(allEnemies[name]);
+				return new Enemy(allEnemies[name]);
 
-            return null;
-        }
+			return null;
+		}
 
-        public Enemy GetEnemy(int id)
-        {
-            if (allEnemies == null || allEnemies.Count == 0)
-                InitializeEnemies();
+		public Enemy GetEnemy(int id)
+		{
+			if (allEnemies == null || allEnemies.Count == 0)
+				InitializeEnemies();
 
 			// Clone the stock implementation and return it
-            return new Enemy(allEnemies.Values.ElementAt(id));
-        }
+			return new Enemy(allEnemies.Values.ElementAt(id));
+		}
 
-        private void InitializeEnemies()
-        {
-            allEnemies = new Dictionary<string, Enemy>();
+		private void InitializeEnemies()
+		{
+			allEnemies = new Dictionary<string, Enemy>();
 
-            var enemiesAsset = Resources.Load("Enemies") as TextAsset;
-            
-            var doc = new XmlDocument();
-            doc.LoadXml(enemiesAsset.text);
+			var enemiesAsset = Resources.Load("Enemies") as TextAsset;
 
-            var enemiesNodes = doc.FirstChild.ChildNodes.OfType<XmlNode>().Where(x => x.Name == "enemy");
+			var parser = new XmlParser();
+			var doc = parser.Doc(enemiesAsset.text);
 
-            foreach (var enemyNode in enemiesNodes)
-            {
-                var name = enemyNode.GetAttributeValue("name");
-                var maxHP = enemyNode.GetAttributeValue("hp").ToInt();				
+			var enemiesNodes = doc.Value.Root.Children.Where(n => n.Name == "enemy");
 
-                var enemy = new Enemy(name, maxHP);
+			foreach (var enemyNode in enemiesNodes)
+			{
+				var name = enemyNode["name"].Value;
 
-				enemy.Speed = enemyNode.GetAttributeValue("speed").ToInt();
-				enemy.Strength = enemyNode.GetAttributeValue("strength").ToInt();
-				enemy.Will = enemyNode.GetAttributeValue("will").ToInt();
-				enemy.Endurance = enemyNode.GetAttributeValue("endurance").ToInt();
+				var maxHP = enemyNode["hp"].Value.ToInt();
 
-				enemy.Experience = enemyNode.GetAttributeValue("xp").ToInt();
-				enemy.Gold = enemyNode.GetAttributeValue("gold").ToInt();
-				enemy.BehaviorType = enemyNode.GetAttributeValue("behavior");
+				var enemy = new Enemy(name, maxHP);
 
-                var textureString = enemyNode.GetAttributeValue("texture");
-                if (!string.IsNullOrEmpty(textureString))
-                {
-                    var texture = Resources.Load("Images/Enemies/" + textureString) as Texture2D;
-                    if (texture != null)
-                        enemy.Sprite = texture;
-                }
+				enemy.Speed = enemyNode["speed"].Value.ToInt();
+				enemy.Strength = enemyNode["strength"].Value.ToInt();
+				enemy.Will = enemyNode["will"].Value.ToInt();
+				enemy.Endurance = enemyNode["endurance"].Value.ToInt();
+
+				enemy.Experience = enemyNode["xp"].Value.ToInt();
+				enemy.Gold = enemyNode["gold"].Value.ToInt();
+				enemy.BehaviorType = enemyNode["behavior"].Value;
+
+				var textureString = enemyNode["texture"].Value;
+				if (!string.IsNullOrEmpty(textureString))
+				{
+					var texture = Resources.Load("Images/Enemies/" + textureString) as Texture2D;
+					if (texture != null)
+						enemy.Sprite = texture;
+				}
 
 				ParseAbilities(enemy, enemyNode);
 
-                allEnemies.Add(enemy.Name, enemy);
-            }
-        }
+				allEnemies.Add(enemy.Name, enemy);
+			}
+		}
 
-		private void ParseAbilities(Enemy enemy, XmlNode enemyNode)
+		private void ParseAbilities(Enemy enemy, Node enemyNode)
 		{
-			var abilitiesNode = enemyNode.ChildNodes.OfType<XmlNode>().FirstOrDefault(x => x.Name == "abilities");
+			var abilitiesNode = enemyNode.Children.FirstOrDefault(x => x.Name == "abilities");
 			if (abilitiesNode == null)
 				return;
 
 			var knownAbilities = new List<Ability>();
 
-			foreach (var abilityNode in abilitiesNode.ChildNodes.OfType<XmlNode>())
+			foreach (var abilityNode in abilitiesNode.Children)
 			{
-				var abilityName = abilityNode.GetAttributeValue("name");
+				var abilityName = abilityNode["name"].Value;
 
 				var ability = AbilityManager.Instance.GetAbility(abilityName);
 				if (ability != null)
@@ -91,8 +109,6 @@ namespace FirstWave.Niot.Game.Managers
 
 			enemy.EquippedAbilities = knownAbilities.Where(a => !a.IsFinisher).ToArray();
 			enemy.EquippedFinishers = knownAbilities.Where(a => a.IsFinisher).ToArray();
-
-			Debug.Log(string.Format("Abilities: {0} Finishers {1}", enemy.EquippedAbilities == null ? 0 : enemy.EquippedAbilities.Length, enemy.EquippedFinishers == null ? 0 : enemy.EquippedFinishers.Length));
 		}
-    }
+	}
 }

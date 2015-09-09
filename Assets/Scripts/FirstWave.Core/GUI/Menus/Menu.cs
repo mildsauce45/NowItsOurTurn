@@ -166,22 +166,28 @@ namespace FirstWave.Core.GUI.Menus
 		{
 			if (horizontalAlignment == HorizontalAlignment.Right)
 				return Screen.width - margin.right - size.x;
-			else
+			else if (horizontalAlignment == HorizontalAlignment.Left)
 				return margin.left;
+			else
+				return (Screen.width / 2) - (size.x) / 2;
 		}
 
 		private float GetYLocation()
 		{
 			if (verticalAlignment == VerticalAlignment.Top)
 				return margin.top;
-			else
+			else if (verticalAlignment == VerticalAlignment.Bottom)
 				return Screen.height - margin.bottom - size.y;
+			else
+				return (Screen.height / 2) - (size.y / 2);
 		}
 
 		private float GetWidth()
 		{
 			if (horizontalAlignment == HorizontalAlignment.Stretch && size.x == 0)
 				return Screen.width - GetXLocation() - margin.right;
+			else if (horizontalAlignment == HorizontalAlignment.Left && size.x == 0)
+				return Screen.width - margin.left - margin.right;
 
 			return size.x;
 		}

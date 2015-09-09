@@ -97,6 +97,8 @@
      <Compile Include="Assets\Scripts\FirstWave.Core\TextDisplayTimer.cs" />
      <Compile Include="Assets\Scripts\FirstWave.Core\Timer.cs" />
      <Compile Include="Assets\Scripts\FirstWave.Core\Tuple.cs" />
+     <Compile Include="Assets\Scripts\FirstWave.Core\Utilities\Maybe.cs" />
+     <Compile Include="Assets\Scripts\FirstWave.Core\Utilities\SafeSingleton.cs" />
      <Compile Include="Assets\Scripts\FirstWave.StateMachine.Unity\State.cs" />
      <Compile Include="Assets\Scripts\FirstWave.StateMachine\DynamicTriggerBehavior.cs" />
      <Compile Include="Assets\Scripts\FirstWave.StateMachine\IgnoredTriggerBehavior.cs" />
@@ -113,6 +115,14 @@
      <Compile Include="Assets\Scripts\FirstWave.TileMap\MapManager.cs" />
      <Compile Include="Assets\Scripts\FirstWave.TileMap\SceneLoader.cs" />
      <Compile Include="Assets\Scripts\FirstWave.TileMap\Water.cs" />
+     <Compile Include="Assets\Scripts\FirstWave.Xml\BasicParser.cs" />
+     <Compile Include="Assets\Scripts\FirstWave.Xml\CharParser.cs" />
+     <Compile Include="Assets\Scripts\FirstWave.Xml\Documents\Attribute.cs" />
+     <Compile Include="Assets\Scripts\FirstWave.Xml\Documents\Document.cs" />
+     <Compile Include="Assets\Scripts\FirstWave.Xml\Documents\Node.cs" />
+     <Compile Include="Assets\Scripts\FirstWave.Xml\Parser.cs" />
+     <Compile Include="Assets\Scripts\FirstWave.Xml\ParserExtensions.cs" />
+     <Compile Include="Assets\Scripts\FirstWave.Xml\XmlParser.cs" />
      <Compile Include="Assets\Scripts\GUI\BackgroundSprite.cs" />
      <Compile Include="Assets\Scripts\GUI\Controls\Battle\AbilityMenu.cs" />
      <Compile Include="Assets\Scripts\GUI\Controls\Battle\AbilityMenuItem.cs" />
@@ -130,10 +140,12 @@
      <Compile Include="Assets\Scripts\Game\Behaviors\KillTheWeakestBehavior.cs" />
      <Compile Include="Assets\Scripts\Game\Combatant.cs" />
      <Compile Include="Assets\Scripts\Game\Constants.cs" />
-     <Compile Include="Assets\Scripts\Game\Editors\AbilityEditor.cs" />
+     <Compile Include="Assets\Scripts\Game\Data\GameData.cs" />
+     <Compile Include="Assets\Scripts\Game\Data\SaveDataHelper.cs" />
      <Compile Include="Assets\Scripts\Game\Enemy.cs" />
      <Compile Include="Assets\Scripts\Game\EnemySize.cs" />
      <Compile Include="Assets\Scripts\Game\Finisher.cs" />
+     <Compile Include="Assets\Scripts\Game\GameStart\InitialMenu.cs" />
      <Compile Include="Assets\Scripts\Game\Player.cs" />
      <Compile Include="Assets\Scripts\Game\ScriptableObjectDatabase.cs" />
      <Compile Include="Assets\Scripts\Game\Weapon.cs" />
@@ -141,8 +153,8 @@
      <Compile Include="Assets\Scripts\Interactables\Sign.cs" />
      <Compile Include="Assets\Scripts\Managers\AbilityManager.cs" />
      <Compile Include="Assets\Scripts\Managers\EnemyManager.cs" />
+     <Compile Include="Assets\Scripts\Managers\GameStateManager.cs" />
      <Compile Include="Assets\Scripts\Managers\InputManager.cs" />
-     <Compile Include="Assets\Scripts\Managers\PartyManager.cs" />
      <Compile Include="Assets\Scripts\Managers\TransitionManager.cs" />
      <Compile Include="Assets\Scripts\Managers\WeaponManager.cs" />
      <Compile Include="Assets\Scripts\Objects\Boat.cs" />

@@ -8,8 +8,27 @@ using UnityEngine;
 
 namespace FirstWave.Niot.Game.Managers
 {
-	public class AbilityManager : Singleton<AbilityManager>
+	public class AbilityManager
 	{
+		#region Singleton Implementation
+
+		private static AbilityManager me;
+		public static AbilityManager Instance
+		{
+			get
+			{
+				if (me == null)
+					me = new AbilityManager();
+				return me;
+			}
+		}
+
+		private AbilityManager()
+		{
+		}
+
+		#endregion
+
 		private IDictionary<int, Ability> allAbilities;
 		private int abilityId = 1;
 

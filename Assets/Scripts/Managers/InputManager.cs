@@ -4,12 +4,14 @@ using System.Collections.Generic;
 
 public class InputManager : Singleton<InputManager>
 {
+	public string[] KeysToMap;
+
 	private IDictionary<string, bool> prevState;
 	private IDictionary<string, bool> currentState;
 
     public bool DisableCharacterMotor = false;
 
-	void Start()
+	void Awake()
 	{
 		prevState = new Dictionary<string, bool>();
 		currentState = new Dictionary<string, bool>();
@@ -28,8 +30,7 @@ public class InputManager : Singleton<InputManager>
 		currentState.Add("Ability1", Input.GetButton("Ability1"));
 		currentState.Add("Ability2", Input.GetButton("Ability2"));
 		currentState.Add("Ability3", Input.GetButton("Ability3"));
-		currentState.Add("Defend", Input.GetButton("Defend"));
-        currentState.Add("Interact", Input.GetButton("Interact"));
+		currentState.Add("Interact", Input.GetButton("Interact"));
         currentState.Add("Cancel", Input.GetButton("Cancel"));
 	}
 

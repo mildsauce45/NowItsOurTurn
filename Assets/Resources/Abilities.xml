@@ -55,7 +55,6 @@
     </range>
   </ability>
 
-  <!-- Finishers -->
   <ability name="Cauterize the Wound" description="" icon="FlameSword" finisher="true" basePower="7" abilityType="Physical">
     <fieldEffectCost elementType="Martial" number="2"/>
     <fieldEffectCost elementType="Fire" number="2"/>

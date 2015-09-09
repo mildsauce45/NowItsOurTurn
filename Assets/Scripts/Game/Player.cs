@@ -2,6 +2,8 @@
 {
 	public class Player : Combatant
 	{
+		public string Class { get; set; }
+
 		public Weapon Weapon { get; set; }
 
 		public Armor Head { get; set; }
