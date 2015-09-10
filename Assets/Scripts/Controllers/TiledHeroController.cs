@@ -78,7 +78,7 @@ public class TiledHeroController : MonoBehaviour
 				transform.position = target;
 				IsMoving = false;
 
-				HandleSceneTransition();
+				HandleEventTiles();
 				HandleBoatTransition();
 
 				if (mapManager.encounterChance > 0 && Random.Range(0, 100) <= mapManager.encounterChance)
@@ -142,17 +142,13 @@ public class TiledHeroController : MonoBehaviour
 		}
 	}
 
-	private void HandleSceneTransition()
+	private void HandleEventTiles()
 	{
-		if (mapManager.SceneLoaders.ContainsKey(transform.position))
+		if (mapManager.EventTiles.ContainsKey(transform.position))
 		{
-			SceneLoader sl = mapManager.SceneLoaders[transform.position];
-			if (sl != null)
-			{
-				TransitionManager.Instance.playerPosition = sl.StartCoordinates;
-
-				Application.LoadLevel(sl.Scene);
-			}
+			var et = mapManager.EventTiles[transform.position];
+			if (et != null)
+				et.OnEnter();				
 		}
 	}
 

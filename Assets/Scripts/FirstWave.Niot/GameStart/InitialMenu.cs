@@ -9,8 +9,6 @@ namespace FirstWave.Game.GameStart
 	{
 		private Menu menu;
 
-		public bool HasSavedGame;
-
 		void Start()
 		{
 			menu = GetComponent<Menu>();
@@ -19,7 +17,7 @@ namespace FirstWave.Game.GameStart
 
 			if (SaveDataHelper.SaveDataExists())
 			{
-				menu.AddMenuItem(new MenuItem("CONTINUE A QUEST", () => { }));
+				menu.AddMenuItem(new MenuItem("CONTINUE A QUEST", LoadExistingGame));
 				menu.AddMenuItem(new MenuItem("DELETE A QUEST", () => { }));
 				
 				menu.size = new Vector2(menu.size.x, 90);
@@ -34,6 +32,13 @@ namespace FirstWave.Game.GameStart
 			GameStateManager.Instance.GameData = SaveDataHelper.StartNewGame();
 
 			Application.LoadLevel("Overworld");
+		}
+
+		private void LoadExistingGame()
+		{
+			SaveDataHelper.ReadGameData();
+
+			Application.LoadLevel("ContinueGame");
 		}
 	}
 }

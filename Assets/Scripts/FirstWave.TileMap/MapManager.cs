@@ -7,8 +7,8 @@ namespace FirstWave.Niot.Managers
 	public class MapManager : MonoBehaviour
 	{
 		public IDictionary<Vector3, Impassable> Impassables { get; private set; }
-		public IDictionary<Vector3, SceneLoader> SceneLoaders { get; private set; }
 		public IDictionary<Vector3, Interactable> Interactables { get; private set; }
+		public IDictionary<Vector3, EventTile> EventTiles { get; private set; }
 
 		public Boat Boat { get; private set; }
 
@@ -36,9 +36,9 @@ namespace FirstWave.Niot.Managers
 		// Use this for initialization
 		void Start()
 		{
-			Impassables = new Dictionary<Vector3, Impassable>();
-			SceneLoaders = new Dictionary<Vector3, SceneLoader>();
+			Impassables = new Dictionary<Vector3, Impassable>();			
 			Interactables = new Dictionary<Vector3, Interactable>();
+			EventTiles = new Dictionary<Vector3, EventTile>();
 
 			var impassables = FindObjectsOfType<Impassable>();
 
@@ -53,15 +53,15 @@ namespace FirstWave.Niot.Managers
 				Impassables.Add(i.gameObject.transform.position, i);
 			}
 
-			var sceneLoaders = FindObjectsOfType<SceneLoader>();
-
-			foreach (var sl in sceneLoaders)
-				SceneLoaders.Add(sl.gameObject.transform.position, sl);
-
 			var interactables = FindObjectsOfType<Interactable>();
 
 			foreach (var i in interactables)
 				Interactables.Add(i.gameObject.transform.position, i);
+
+			var eventTiles = FindObjectsOfType<EventTile>();
+
+			foreach (var et in eventTiles)
+				EventTiles.Add(et.gameObject.transform.position, et);
 
 			var boat = GameObject.FindObjectOfType<Boat>();
 			if (boat != null)

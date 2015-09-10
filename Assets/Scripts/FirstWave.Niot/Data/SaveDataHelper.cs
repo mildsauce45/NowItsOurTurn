@@ -17,17 +17,43 @@ namespace FirstWave.Niot.Game.Data
 
 		#endregion
 
-		private static GameData[] SavedGameData = new GameData[3];
+		public static bool DataLoaded
+		{
+			get { return SavedGameData.Any(gd => gd != null); }
+		}
+
+		private static GameData[] SavedGameData = new GameData[Constants.Ranges.NUM_OF_GAME_SAVES];
 		private static int SaveGameIndex = -1;		
 
 		public static bool SaveDataExists()
 		{
-			if (!DoesDataFileExist())
-				CreateDataFile();
+			return File.Exists(SAVE_FILE_1) || File.Exists(SAVE_FILE_2) || File.Exists(SAVE_FILE_3);
+		}		
 
-			// Read GameData Headers (you know, name and level)
+		public static void ReadGameData()
+		{
+			if (File.Exists(SAVE_FILE_1))
+			{
+				SaveGameIndex = 0;
 
-			return SavedGameData.Any(sgd => sgd != null);
+				SavedGameData[SaveGameIndex] = GameData.Load();
+			}
+
+			if (File.Exists(SAVE_FILE_2))
+			{
+				SaveGameIndex = 1;
+
+				SavedGameData[SaveGameIndex] = GameData.Load();
+			}
+
+			if (File.Exists(SAVE_FILE_3))
+			{
+				SaveGameIndex = 2;
+
+				SavedGameData[SaveGameIndex] = GameData.Load();
+			}
+
+			SaveGameIndex = -1;
 		}
 
 		public static GameData StartNewGame()
@@ -39,6 +65,11 @@ namespace FirstWave.Niot.Game.Data
 			SavedGameData[SaveGameIndex] = newGameData;
 
 			return newGameData;
+		}
+
+		public static GameData GetGameData(int index)
+		{
+			return SavedGameData[index];
 		}
 
 		public static GameData ContinueExistingGame(int index)
@@ -67,6 +98,28 @@ namespace FirstWave.Niot.Game.Data
 		}
 
 		#region I/O Methods
+
+		public static Stream GetGameDataStream(FileAccess access)
+		{
+			if (SaveGameIndex < 0)
+			{
+				Debug.LogError("We shouldn't have been able to save the game yet alone load it (ignore if this is development)");
+				SaveGameIndex = 0;
+			}
+
+			var location = SAVE_FILE_1;
+			if (SaveGameIndex == 1)
+				location = SAVE_FILE_2;
+			else if (SaveGameIndex == 2)
+				location = SAVE_FILE_3;
+
+			if (access == FileAccess.Write)
+				return File.OpenWrite(location);
+			else if (access == FileAccess.Read)
+				return File.OpenRead(location);
+
+			throw new ArgumentException("access mode was neither read nor write");
+		}
 
 		private static bool DoesDataFileExist()
 		{

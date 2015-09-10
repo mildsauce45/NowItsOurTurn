@@ -9,6 +9,9 @@
 		public Armor Head { get; set; }
 		public Armor Chestpiece { get; set; }
 
+		public int Level { get; set; }
+		public int Exp { get; set; }
+
 		public Ability[] AllAbilities { get; set; }
 
 		public override int AttackPower
@@ -37,17 +40,21 @@
 			}
 		}
 
-		public Player(string name, int maxHP)
+		public Player()
 		{
-			this.Name = name;
-
-			MaxHP = maxHP;
-			CurrentHP = maxHP;
-
 			AllAbilities = new Ability[20];
 
 			EquippedAbilities = new Ability[Constants.Ranges.STANDARD_ABILITY_SIZE];
 			EquippedFinishers = new Ability[Constants.Ranges.FINISHER_ABILITY_SIZE];
+		}
+
+		public Player(string name, int maxHP)
+			: this()
+		{
+			this.Name = name;
+
+			MaxHP = maxHP;
+			CurrentHP = maxHP;	
 		}
 	}
 }

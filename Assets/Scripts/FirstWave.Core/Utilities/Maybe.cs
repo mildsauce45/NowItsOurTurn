@@ -46,6 +46,6 @@ namespace FirstWave.Core.Utilities
 		public static bool operator !=(Maybe<T> m1, Maybe<T> m2)
 		{
 			return !(m1 == m2);
-		}
+		}		
 	}
 }

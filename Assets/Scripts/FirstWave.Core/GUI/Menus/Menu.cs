@@ -82,6 +82,9 @@ namespace FirstWave.Core.GUI.Menus
 
 		void OnGUI()
 		{
+			if (this.menuItems == null || !this.menuItems.Any())
+				return;
+
 			var style = GUIManager.GetMessageBoxStyle(fontProperties);
 
 			BorderBox.Draw(new Rect(GetXLocation(), GetYLocation(), GetWidth(), size.y), textures);
