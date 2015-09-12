@@ -31,7 +31,7 @@ namespace FirstWave.Game.GameStart
 		{
 			GameStateManager.Instance.GameData = SaveDataHelper.StartNewGame();
 
-			Application.LoadLevel("Overworld");
+			Application.LoadLevel("ThroneRoomFloor");
 		}
 
 		private void LoadExistingGame()
