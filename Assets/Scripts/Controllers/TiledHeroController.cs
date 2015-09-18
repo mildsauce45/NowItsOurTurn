@@ -5,7 +5,6 @@ using UnityEngine;
 public class TiledHeroController : MonoBehaviour
 {
 	public float MoveSpeed = 5f;
-	public Vector2 MaxCoordinates;
 
 	private bool IsMoving = false;
 
@@ -117,20 +116,7 @@ public class TiledHeroController : MonoBehaviour
 			anim.SetFloat("InputX", targetX);
 			anim.SetFloat("InputY", targetY);
 
-			// First do some bounds checking
-			if (target.x < 0 || target.y < 0 || target.x > MaxCoordinates.x || target.y > MaxCoordinates.y)
-			{
-				if (!string.IsNullOrEmpty(mapManager.exitToScene))
-				{
-					TransitionManager.Instance.playerPosition = mapManager.exitToCoordinates;
-					Application.LoadLevel(mapManager.exitToScene);
-				}
-
-				return;
-			}
-			
 			// Check to see if the target tile can be moved onto
-			
 			if (mapManager.Impassables.ContainsKey(target))
 			{
 				Impassable i = mapManager.Impassables[target];
@@ -148,7 +134,7 @@ public class TiledHeroController : MonoBehaviour
 		{
 			var et = mapManager.EventTiles[transform.position];
 			if (et != null)
-				et.OnEnter();				
+				et.OnEnter();
 		}
 	}
 
