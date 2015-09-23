@@ -74,11 +74,11 @@
      <Compile Include="Assets\Scripts\Controllers\TiledHeroController.cs" />
      <Compile Include="Assets\Scripts\Dialogs\Conversation.cs" />
      <Compile Include="Assets\Scripts\Dialogs\ConversationItem.cs" />
-     <Compile Include="Assets\Scripts\Dialogs\ConversationManager.cs" />
      <Compile Include="Assets\Scripts\Dialogs\Dialog.cs" />
      <Compile Include="Assets\Scripts\FirstWave.Core\Audio\AudioTimer.cs" />
      <Compile Include="Assets\Scripts\FirstWave.Core\CombinedTimer.cs" />
      <Compile Include="Assets\Scripts\FirstWave.Core\Extensions\EnumExtensions.cs" />
+     <Compile Include="Assets\Scripts\FirstWave.Core\Extensions\GameObjectExtensions.cs" />
      <Compile Include="Assets\Scripts\FirstWave.Core\Extensions\StringExtensions.cs" />
      <Compile Include="Assets\Scripts\FirstWave.Core\Extensions\XmlNodeExtensions.cs" />
      <Compile Include="Assets\Scripts\FirstWave.Core\GUI\Alignments.cs" />
@@ -154,8 +154,10 @@
      <Compile Include="Assets\Scripts\GUI\Controls\BorderedLabel.cs" />
      <Compile Include="Assets\Scripts\GUI\SpriteFunctions.cs" />
      <Compile Include="Assets\Scripts\Interactables\Interactable.cs" />
+     <Compile Include="Assets\Scripts\Interactables\NPC.cs" />
      <Compile Include="Assets\Scripts\Interactables\Sign.cs" />
      <Compile Include="Assets\Scripts\Managers\AbilityManager.cs" />
+     <Compile Include="Assets\Scripts\Managers\ConversationManager.cs" />
      <Compile Include="Assets\Scripts\Managers\EnemyManager.cs" />
      <Compile Include="Assets\Scripts\Managers\GameStateManager.cs" />
      <Compile Include="Assets\Scripts\Managers\InputManager.cs" />

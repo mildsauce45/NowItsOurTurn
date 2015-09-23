@@ -1,147 +1,156 @@
 ﻿using FirstWave.Core.GUI;
 using UnityEngine;
 
-public class Dialog : MonoBehaviour
+namespace FirstWave.Core.GUI.Dialogs
 {
-    public string Text;
-    
-    public Font Font;
+	public class Dialog : MonoBehaviour
+	{
+		public string Text;
 
-    #region GUI Elements
+		#region GUI Elements
 
-	public BorderTextures textures;
+		public BorderTextures textures;
+		public FontProperties fontProperties;
 
-    #endregion
+		#endregion
 
-    public float InputDelay = 0.5f;
-    public float CharacterDelay = 0.0125f;
+		public float InputDelay = 0.5f;
+		public float CharacterDelay = 0.0125f;
 
-    public float HorizontalOffset = 10f;
-    public float VerticalOffset = 10f;
-    public float TextPadding = 10f;
-    public float Height = 200f;
+		public float HorizontalOffset = 10f;
+		public float VerticalOffset = 10f;
+		public float TextPadding = 10f;
+		public float Height = 200f;
 
-    public float ChoiceWidth = 150f;
-    public float ChoiceHeight = 35f;
+		public float ChoiceWidth = 150f;
+		public float ChoiceHeight = 35f;
 
-    private float inputPassedTime;
-    private float characterDisplayPassedTime;
-    private Conversation conversation;
-    //private ConversationManager conversationManager;
+		private float inputPassedTime;
+		private float characterDisplayPassedTime;
+		private Conversation conversation;
 
-    private InputManager inputManager;
+		private InputManager inputManager;
 
-    public delegate void CloseAction();
-    public static event CloseAction OnClosed;
+		public delegate void CloseAction(string branch);
+		public event CloseAction OnClosed;
 
-    void Start()
-    {
-        inputPassedTime = 0f;
-        characterDisplayPassedTime = 0f;
+		void Start()
+		{
+			inputPassedTime = 0f;
+			characterDisplayPassedTime = 0f;
 
-        //conversationManager = FindObjectOfType<ConversationManager>();
-        inputManager = FindObjectOfType<InputManager>();
-    }
+			inputManager = FindObjectOfType<InputManager>();
+		}
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (inputPassedTime > InputDelay)
-        {
-            if (inputManager.KeyReleased("Interact"))
-            {
-                if (conversation == null || (!conversation.RequiresChoice && conversation.IsComplete))
-                {
-                    ResetTimers(true);
+		// Update is called once per frame
+		void Update()
+		{
+			if (inputPassedTime > InputDelay)
+			{
+				if (inputManager.KeyReleased("Interact"))
+				{
+					if (conversation == null || (!conversation.RequiresChoice && conversation.IsComplete))
+						SafeRaiseClose();
+					else if (conversation != null)
+					{
+						if (conversation.RequiresChoice)
+						{
+							conversation.SetChoice();
+							if (conversation.IsComplete)
+								SafeRaiseClose();
+						}
 
-                    if (OnClosed != null)
-                        OnClosed();
+						conversation.AdvanceConversation();
 
-                    if (conversation != null)
-                        conversation.Restart();
-                }
-                else if (conversation != null)
-                {
-                    ResetTimers(true);
+						ResetTimers();
+					}
+				}
+				else if (inputManager.KeyReleased("Cancel"))
+					SafeRaiseClose();
+				else if (conversation != null)
+				{
+					if (inputManager.KeyReleased("left"))
+						conversation.PrevChoice();
+					else if (inputManager.KeyReleased("right"))
+						conversation.NextChoice();
+				}
+			}
 
-                    if (conversation.RequiresChoice)
-                        conversation.SetChoice();
+			inputPassedTime += Time.deltaTime;
+			characterDisplayPassedTime += Time.deltaTime;
+		}
 
-                    conversation.AdvanceConversation();
-                }
-            }
-            else if ((conversation != null && conversation.RequiresChoice) && Mathf.Abs(Input.GetAxis("Horizontal")) > 0)
-            {
-                ResetTimers(false);
+		void OnGUI()
+		{
+			GUIStyle style = GUIManager.GetMessageBoxStyle(null);
 
-                float input = Input.GetAxis("Horizontal");
-                if (input < 0)
-                    conversation.PrevChoice();
-                else
-                    conversation.NextChoice();
-            }
-        }
+			float dialogWidth = Screen.width - (HorizontalOffset * 2);
 
-            inputPassedTime += Time.deltaTime;
-            characterDisplayPassedTime += Time.deltaTime;
-    }
+			string dialogText = conversation != null ? conversation.CurrentLine : Text;
+			
+			BorderBox.Draw(new Rect(HorizontalOffset, VerticalOffset, dialogWidth, Height), textures);
 
-    void OnGUI()
-    {
-        GUIStyle style = GUIManager.GetMessageBoxStyle(null);
+			int numCharacters = (int)(characterDisplayPassedTime / CharacterDelay);
+			numCharacters = Mathf.Clamp(numCharacters, 0, dialogText.Length);
 
-        float dialogWidth = Screen.width - (HorizontalOffset * 2);
+			UnityEngine.GUI.Label(new Rect(HorizontalOffset + TextPadding, VerticalOffset + TextPadding, dialogWidth - (TextPadding * 2),
+					  Height - (TextPadding * 2)),
+					  dialogText.Substring(0, numCharacters), style);
 
-        string dialogText = conversation != null ? conversation.CurrentLine : Text;
+			if (conversation != null && conversation.RequiresChoice)
+			{
+				var choiceItem = conversation.CurrentItem as ChoiceItem;
 
-        BorderBox.Draw(new Rect(HorizontalOffset, VerticalOffset, dialogWidth, Height), textures);
+				float startY = Height + VerticalOffset + 10;
+				float startX = HorizontalOffset;
 
-        int numCharacters = (int)(characterDisplayPassedTime / CharacterDelay);
-        numCharacters = Mathf.Clamp(numCharacters, 0, dialogText.Length);
+				int currentChoice = 0;
+				foreach (var option in choiceItem.Options)
+				{
+					BorderBox.Draw(new Rect(startX, startY, ChoiceWidth, ChoiceHeight), textures);
 
-        GUI.Label(new Rect(HorizontalOffset + TextPadding, VerticalOffset + TextPadding, dialogWidth - (TextPadding * 2),
-                  Height - (TextPadding * 2)),
-                  dialogText.Substring(0, numCharacters), style);
+					var optionContent = new GUIContent(option.Text);
+					var textSize = style.CalcSize(optionContent);
 
-        if (conversation != null && conversation.RequiresChoice)
-        {
-            var choiceItem = conversation.CurrentItem as ChoiceItem;
+					float optionStartY = startY + ((ChoiceHeight - textSize.y) / 2) + (fontProperties.additionalPadding > 0 ? fontProperties.additionalPadding : 0);
 
-            float startY = Height + VerticalOffset + 10;
-            float startX = HorizontalOffset;
+					UnityEngine.GUI.Label(new Rect(startX + ((ChoiceWidth - textSize.x) / 2), optionStartY, textSize.x, textSize.y), optionContent, style);
 
-            int currentChoice = 0;
-            foreach (var option in choiceItem.Options)
-            {
-                BorderBox.Draw(new Rect(startX, startY, ChoiceWidth, ChoiceHeight), textures);
+					if (currentChoice == conversation.CurrentChoice)
+						UnityEngine.GUI.DrawTexture(new Rect((startX + (ChoiceWidth - textures.Pointer.width) / 2) - 20, startY + (ChoiceHeight - textures.Pointer.height) / 2, textures.Pointer.width, textures.Pointer.height), textures.Pointer);
 
-                var textSize = style.CalcSize(new GUIContent(option.Text));
-                GUI.Label(new Rect(startX + ((ChoiceWidth - textSize.x) / 2), startY + ((ChoiceHeight - textSize.y) / 2), textSize.x, textSize.y), option.Text, style);
+					startX += ChoiceWidth + 10;
+					currentChoice++;
+				}
+			}
+		}
 
-                if (currentChoice == conversation.CurrentChoice)
-                    GUI.DrawTexture(new Rect((startX + (ChoiceWidth - textures.Pointer.width) / 2) - 20, startY + (ChoiceHeight - textures.Pointer.height) / 2, textures.Pointer.width, textures.Pointer.height), textures.Pointer);
+		private void ResetTimers(bool resetCharacters = true)
+		{
+			inputPassedTime = 0f;
 
-                startX += ChoiceWidth + 10;
-                currentChoice++;
-            }
-        }
-    }
+			if (resetCharacters)
+				characterDisplayPassedTime = 0f;
+		}
 
-    private void ResetTimers(bool resetCharacters)
-    {
-        inputPassedTime = 0f;
+		public void StartConversation(string text)
+		{
+			Text = text;
+		}
 
-        if (resetCharacters)
-            characterDisplayPassedTime = 0f;
-    }
+		public void StartConversation(Conversation conversation)
+		{
+			conversation.Restart();
 
-    public void StartConversation(string text)
-    {
-        Text = text;
-    }
+			this.conversation = conversation;
+		}
 
-    public void StartConversation(Conversation conversation)
-    {
-        this.conversation = conversation;
-    }
+		private void SafeRaiseClose()
+		{
+			ResetTimers();
+
+			if (OnClosed != null)
+				OnClosed(conversation != null ? conversation.CurrentBranch : null);			
+		}
+	}
 }

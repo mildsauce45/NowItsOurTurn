@@ -1,15 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
+using FirstWave.Core.GUI.Dialogs;
+using FirstWave.Core.Extensions;
 
 public class Sign : Interactable
 {
-
 	public string SignText;
 	public GameObject DialogPrefab;
 
 	private float passedTime;
 	private bool startTimer;
-	private GameObject dialog;
+	private Dialog dialog;
 
 	public float InputDelay = 0.5f;
 
@@ -43,16 +44,16 @@ public class Sign : Interactable
 	{
 		if (dialog == null)
 		{
-			dialog = GameObject.Instantiate(DialogPrefab, Vector3.zero, Quaternion.identity) as GameObject;
+			dialog = DialogPrefab.Instantiate().GetComponent<Dialog>();
 
-			Dialog.OnClosed += DialogClosed;
+			dialog.OnClosed += DialogClosed;
 			dialog.GetComponent<Dialog>().StartConversation(SignText);
 		}
 	}
 
-	void DialogClosed()
+	void DialogClosed(string branch)
 	{
-		Dialog.OnClosed -= DialogClosed;
+		dialog.OnClosed -= DialogClosed;
 
 		GameObject.Destroy(dialog);
 

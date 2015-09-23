@@ -30,6 +30,7 @@ namespace FirstWave.Xml
 		private readonly Parser<string, Node> ShortNode;
 		private readonly Parser<string, Node> ValueNode;
 		private readonly Parser<string, Node> FullNode;
+		private readonly Parser<string, char> Punctuation;
 
 		private readonly Parser<string, char[]> XmlDeclaration;
 
@@ -54,6 +55,9 @@ namespace FirstWave.Xml
 			Eq = Char('=');
 			Slash = Char('/');
 
+			// Slightly more complex parser but still dealing with individual characters
+			Punctuation = Char('.').Or(Char('?')).Or(Char('!')).Or(Char('{')).Or(Char('}')).Or(Char('"'));
+
 			// A parser to check for the xml declaration usually found just before the root node of an xml document
 			XmlDeclaration = from lws in Whitespace
 							 from lt in Lt
@@ -73,7 +77,7 @@ namespace FirstWave.Xml
 			// The value of a node contains letters, digits, or whitespace. again this is incomplete as it should really allow for any
 			// character that is between the > of the node declaration and the </ of the close of the node
 			Value = from c in LetterOrDigit()
-					from cs in Repeat(LetterOrDigit().Or(IsWhitespace()))
+					from cs in Repeat(LetterOrDigit().Or(IsWhitespace()).Or(Punctuation))
 					select new string(new[] { c }.Concat(cs).ToArray());
 
 			// Parse out the beginning portion of a node declaration by combining the < parser with the Id parser. We'll only select out the
