@@ -135,6 +135,7 @@
     <Compile Include="Assets\Scripts\FirstWave.TileMap\EventTile.cs" />
     <Compile Include="Assets\Scripts\FirstWave.TileMap\Impassable.cs" />
     <Compile Include="Assets\Scripts\FirstWave.TileMap\MapManager.cs" />
+    <Compile Include="Assets\Scripts\FirstWave.TileMap\Patroller.cs" />
     <Compile Include="Assets\Scripts\FirstWave.TileMap\SceneLoader.cs" />
     <Compile Include="Assets\Scripts\FirstWave.TileMap\Water.cs" />
     <Compile Include="Assets\Scripts\FirstWave.Xml\BasicParser.cs" />
@@ -153,6 +154,7 @@
     <Compile Include="Assets\Scripts\GUI\Controls\Battle\PartyInformationDisplay.cs" />
     <Compile Include="Assets\Scripts\GUI\Controls\BorderedLabel.cs" />
     <Compile Include="Assets\Scripts\GUI\SpriteFunctions.cs" />
+    <Compile Include="Assets\Scripts\Interactables\Chest.cs" />
     <Compile Include="Assets\Scripts\Interactables\Interactable.cs" />
     <Compile Include="Assets\Scripts\Interactables\NPC.cs" />
     <Compile Include="Assets\Scripts\Interactables\Sign.cs" />
@@ -168,9 +170,7 @@
     <None Include="Assets\Resources\Weapons.xml" />
     <None Include="Assets\Resources\Abilities.xml" />
     <None Include="Assets\Resources\Enemies.xml" />
-    <None Include="Assets\Resources\Conversations.xml">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="Assets\Resources\Conversations.xml" />
     <None Include="Assets\Sprites\GreyScaleShader.shader" />
     <Reference Include="UnityEngine.UI">
       <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

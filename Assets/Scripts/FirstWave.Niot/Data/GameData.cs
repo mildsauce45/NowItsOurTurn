@@ -4,6 +4,7 @@ using FirstWave.Core.Extensions;
 using FirstWave.Niot.Data;
 using FirstWave.Niot.Game.Managers;
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace FirstWave.Niot.Game.Data
 {
@@ -19,6 +20,8 @@ namespace FirstWave.Niot.Game.Data
 
 		public int Gold { get; set; }
 
+		public HashSet<string> Collectibles { get; set; }
+
 		public string Scene { get; set; }
 		public Vector2 Location { get; set; }
 
@@ -30,7 +33,7 @@ namespace FirstWave.Niot.Game.Data
 
 			leader.Class = "Demon Lord";
 			leader.Level = 1;
-			leader.Exp = 0;			
+			leader.Exp = 0;
 
 			leader.Speed = 6;
 			leader.Strength = 5;
@@ -40,6 +43,8 @@ namespace FirstWave.Niot.Game.Data
 			leader.Weapon = WeaponManager.Instance.GetWeapon(1);
 
 			Party[0] = leader;
+
+			Collectibles = new HashSet<string>();
 		}
 
 		public void Save(string sceneName, Vector2 currentLocation)
@@ -58,6 +63,13 @@ namespace FirstWave.Niot.Game.Data
 					writer.WriteLine(Location.y);
 
 					writer.WriteLine(Gold);
+
+					writer.WriteLine(Collectibles.Count);
+					if (Collectibles.Count > 0)
+					{
+						foreach (var key in Collectibles)
+							writer.WriteLine(key);
+					}
 
 					int partyMembers = Party.Count(p => p != null);
 					writer.WriteLine(partyMembers);
@@ -78,7 +90,7 @@ namespace FirstWave.Niot.Game.Data
 			{
 				using (var reader = new StreamReader(fileStream))
 				{
-					int version = reader.ReadLine().ToInt();					
+					int version = reader.ReadLine().ToInt();
 
 					switch (version)
 					{
@@ -90,6 +102,14 @@ namespace FirstWave.Niot.Game.Data
 							gameData.Location = new Vector2(x, y);
 
 							gameData.Gold = reader.ReadLine().ToInt();
+
+							gameData.Collectibles = new HashSet<string>();
+							int numCollectibles = reader.ReadLine().ToInt();
+							if (numCollectibles > 0)
+							{
+								for (int i = 0; i < numCollectibles; i++)
+									gameData.Collectibles.Add(reader.ReadLine());
+							}
 
 							int partyMemberCount = reader.ReadLine().ToInt();
 							for (int i = 0; i < partyMemberCount; i++)

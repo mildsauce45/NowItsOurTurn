@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using FirstWave.TileMap;
+using System.Linq;
 using UnityEngine;
 
 namespace FirstWave.Niot.Managers
@@ -63,9 +64,33 @@ namespace FirstWave.Niot.Managers
 			foreach (var et in eventTiles)
 				EventTiles.Add(et.gameObject.transform.position, et);
 
-			var boat = GameObject.FindObjectOfType<Boat>();
+			var boat = FindObjectOfType<Boat>();
 			if (boat != null)
 				Boat = boat;
+		}
+
+		/// <summary>
+		/// Used to update the location of NPCs walking around the map
+		/// </summary>
+		/// <param name="i"></param>
+		public void UpdateLocation(Impassable i)
+		{
+			foreach (var location in Impassables.Keys.ToList())
+			{
+				if (Impassables[location] == i)
+				{
+					Impassables.Remove(location);
+					Impassables.Add(i.gameObject.transform.position, i);
+
+					// If this NPC is also interactable, we need to update that location as well
+					if (i.GetComponent<Interactable>())
+					{
+						Interactables.Remove(location);
+						Interactables.Add(i.gameObject.transform.position, i.GetComponent<Interactable>());
+					}
+					break;
+				}
+			}
 		}
 	}
 }

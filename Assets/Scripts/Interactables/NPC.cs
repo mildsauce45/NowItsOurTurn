@@ -1,6 +1,7 @@
 ﻿using FirstWave.Core.Extensions;
 using FirstWave.Core.GUI.Dialogs;
 using FirstWave.Niot.Managers;
+using FirstWave.TileMap;
 using UnityEngine;
 
 namespace FirstWave.Niot.Interactables
@@ -19,6 +20,13 @@ namespace FirstWave.Niot.Interactables
 		private bool startTimer;
 		private Dialog dialogInstance;
 
+		private Patroller patroller;
+
+		void Start()
+		{
+			patroller = GetComponent<Patroller>();
+		}
+
 		public override bool DisableCharacterMotor
 		{
 			get { return true; }
@@ -35,6 +43,9 @@ namespace FirstWave.Niot.Interactables
 
 			dialogInstance.StartConversation(ConversationManager.Instance.GetConversation(conversationName));
 			dialogInstance.OnClosed += Dialog_OnClosed;
+
+			if (patroller != null)
+				patroller.disableCharacterMotor = true;			
 		}
 
 		private void Dialog_OnClosed(string branch)
@@ -43,8 +54,11 @@ namespace FirstWave.Niot.Interactables
 
 			InputManager.Instance.Flush();
 
-			GameObject.Destroy(dialogInstance.gameObject);
+			Destroy(dialogInstance.gameObject);
 			dialogInstance = null;
+
+			if (patroller != null)
+				patroller.disableCharacterMotor = false;
 
 			FindObjectOfType<InputManager>().DisableCharacterMotor = false;
 		}
