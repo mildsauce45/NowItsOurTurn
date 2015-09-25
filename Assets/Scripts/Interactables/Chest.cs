@@ -10,6 +10,7 @@ namespace FirstWave.Niot.Interactables
 		public string chestKey;
 
 		public int itemId;
+		public int gold;
 
 		public Sprite closedSprite;
 		public Sprite openedSprite;
@@ -48,8 +49,19 @@ namespace FirstWave.Niot.Interactables
 
 			dialogInstance = dialogPrefab.Instantiate().GetComponent<Dialog>();
 
-			dialogInstance.StartConversation("You found an item!");
-			dialogInstance.OnClosed += Dialog_OnClosed;			
+			var convo = string.Empty;
+			if (gold > 0)
+			{
+				convo = string.Format("You found {0} gold!", gold);
+				GameStateManager.Instance.GameData.Gold += gold;
+			}
+			else
+			{
+				convo = string.Format("You found a {0}!", "item");
+			}
+
+			dialogInstance.StartConversation(convo);
+			dialogInstance.OnClosed += Dialog_OnClosed;
 		}
 
 		private void UpdateRendererComponent()

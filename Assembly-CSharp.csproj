@@ -133,6 +133,7 @@
      <Compile Include="Assets\Scripts\FirstWave.TileMap\DirectionalImpassable.cs" />
      <Compile Include="Assets\Scripts\FirstWave.TileMap\Directions.cs" />
      <Compile Include="Assets\Scripts\FirstWave.TileMap\EventTile.cs" />
+     <Compile Include="Assets\Scripts\FirstWave.TileMap\FaceDirection.cs" />
      <Compile Include="Assets\Scripts\FirstWave.TileMap\Impassable.cs" />
      <Compile Include="Assets\Scripts\FirstWave.TileMap\MapManager.cs" />
      <Compile Include="Assets\Scripts\FirstWave.TileMap\Patroller.cs" />

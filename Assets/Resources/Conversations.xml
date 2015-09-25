@@ -11,6 +11,24 @@
     <line>Crush those tiny humans into dust!</line>
 	</conversation>
   <conversation name="save point description" speaker="imp">
-    <line>This thing here is a save point. Stepping on it will automatically save your game.</line>
+    <line>This thing here is a void imprinter. Stepping on it will store your consciousness in the void should you ever need to leave this plane and return later.</line>
+  </conversation>
+  <conversation name="charlock war training" speaker="imp">
+    <line>I'm training these layabouts for our assault on Rimuldar to the west.</line>    
+  </conversation>
+  <conversation name="charlock trainee 1" speaker="tiger">
+    <line>All abilities effect the amount of elemental energy in the area. You can use the energy with Finishers. There's so much to learn.</line>
+  </conversation>
+  <conversation name="charlock trainee 2" speaker="tiger">
+    <line>Finishers consume the elemental energy on battlefield. If there isn't enough energy on the battlefield when you try to use it, you will have wasted an oppurtunity.</line>
+  </conversation>
+  <conversation name="charlock trainee 3" speaker="tiger">
+    <line>Thanks to the dark power of Archdemon Charon, your wounds will close completely after each battle; but that doesn't mean you will return to life.</line>
+  </conversation>
+  <conversation name="charlock throne skeleton" speaker="skeleton">
+    <line>The soothsayers say that the island kingdom of Baron is where the hero was born.</line>
+  </conversation>
+  <conversation name="charlock throne ghost" speaker="ghost">
+    <line>Somewhere in this world lie shrines to each of the elements: Fire, Water, Light, Dark, and Martial</line>
   </conversation>
 </conversations>
