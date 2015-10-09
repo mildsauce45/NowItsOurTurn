@@ -118,6 +118,7 @@
      <Compile Include="Assets\Scripts\FirstWave.Niot\GameStart\SavedGameSelection.cs" />
      <Compile Include="Assets\Scripts\FirstWave.Niot\Player.cs" />
      <Compile Include="Assets\Scripts\FirstWave.Niot\Progression\DialogProgression.cs" />
+     <Compile Include="Assets\Scripts\FirstWave.Niot\Progression\HideObjectProgression.cs" />
      <Compile Include="Assets\Scripts\FirstWave.Niot\Progression\ProgressionTrigger.cs" />
      <Compile Include="Assets\Scripts\FirstWave.Niot\Progression\StoryTrigger.cs" />
      <Compile Include="Assets\Scripts\FirstWave.Niot\ScriptableObjectDatabase.cs" />

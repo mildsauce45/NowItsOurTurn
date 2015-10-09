@@ -12,11 +12,14 @@ namespace FirstWave.Niot.Progression
 		public TiledHeroController hero;
 
 		private Dialog dialogInstance;
+		private string progression;
 
-		public override void Trigger()
+		public override void Trigger(string progression)
 		{
 			if (hero)
 				hero.enabled = false;
+
+			this.progression = progression;
 
 			dialogInstance = dialogPrefab.Instantiate().GetComponent<Dialog>();
 			dialogInstance.StartConversation(ConversationManager.Instance.GetConversation(conversationName));
@@ -34,6 +37,9 @@ namespace FirstWave.Niot.Progression
 
 			if (hero)
 				hero.enabled = true;
+
+			if (!string.IsNullOrEmpty(progression))
+				GameStateManager.Instance.GameData.StoryProgressions.Add(progression);
 		}
 	}
 }

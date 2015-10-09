@@ -6,7 +6,8 @@ namespace FirstWave.Niot.Progression
 	public enum TriggerType
 	{
 		OnStart,
-		OnEnter
+		OnEnter,
+		Check
 	}
 
 	public class StoryTrigger : MonoBehaviour
@@ -19,6 +20,12 @@ namespace FirstWave.Niot.Progression
 
 		public GameObject triggerHandler;
 
+		void Awake()
+		{
+			if (triggerType == TriggerType.Check && PlayerHasRequiredProgression())
+				HandleTrigger();
+		}
+
 		void Start()
 		{
 			if (triggerType == TriggerType.OnStart && PlayerHasRequiredProgression())
@@ -28,7 +35,13 @@ namespace FirstWave.Niot.Progression
 		void OnTriggerEnter2D(Collider2D other)
 		{
 			if (triggerType == TriggerType.OnEnter && PlayerHasRequiredProgression())
-				HandleTrigger();			
+				HandleTrigger();
+		}
+
+		void Update()
+		{
+			if (triggerType == TriggerType.Check && PlayerHasRequiredProgression())
+				HandleTrigger();
 		}
 
 		private bool PlayerHasRequiredProgression()
@@ -50,11 +63,8 @@ namespace FirstWave.Niot.Progression
 
 		private void HandleTrigger()
 		{
-			if (!string.IsNullOrEmpty(progression))
-				GameStateManager.Instance.GameData.StoryProgressions.Add(progression);
-
 			if (triggerHandler)
-				triggerHandler.GetComponent<ProgressionTrigger>().Trigger();
+				triggerHandler.GetComponent<ProgressionTrigger>().Trigger(progression);
 		}
 	}
 }
