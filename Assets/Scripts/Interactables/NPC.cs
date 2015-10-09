@@ -12,12 +12,7 @@ namespace FirstWave.Niot.Interactables
 		public string conversationName;
 
 		public GameObject dialogPrefab;
-
-		// This is here primarily so that the conversation doesn't restart immediately after it's ended
-		public float InputDelay = 0.5f;
-
-		private float passedTime;
-		private bool startTimer;
+		
 		private Dialog dialogInstance;
 
 		private Patroller patroller;

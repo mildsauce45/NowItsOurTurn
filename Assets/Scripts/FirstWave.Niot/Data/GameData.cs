@@ -1,10 +1,10 @@
-﻿using System.IO;
-using System.Linq;
-using FirstWave.Core.Extensions;
+﻿using FirstWave.Core.Extensions;
 using FirstWave.Niot.Data;
 using FirstWave.Niot.Game.Managers;
-using UnityEngine;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using UnityEngine;
 
 namespace FirstWave.Niot.Game.Data
 {
@@ -21,6 +21,7 @@ namespace FirstWave.Niot.Game.Data
 		public int Gold { get; set; }
 
 		public HashSet<string> Collectibles { get; set; }
+		public HashSet<string> StoryProgressions { get; set; }
 
 		public string Scene { get; set; }
 		public Vector2 Location { get; set; }
@@ -45,6 +46,7 @@ namespace FirstWave.Niot.Game.Data
 			Party[0] = leader;
 
 			Collectibles = new HashSet<string>();
+			StoryProgressions = new HashSet<string>();
 		}
 
 		public void Save(string sceneName, Vector2 currentLocation)
@@ -68,6 +70,13 @@ namespace FirstWave.Niot.Game.Data
 					if (Collectibles.Count > 0)
 					{
 						foreach (var key in Collectibles)
+							writer.WriteLine(key);
+					}
+
+					writer.WriteLine(StoryProgressions.Count);
+					if (StoryProgressions.Count > 0)
+					{
+						foreach (var key in StoryProgressions)
 							writer.WriteLine(key);
 					}
 
@@ -109,6 +118,14 @@ namespace FirstWave.Niot.Game.Data
 							{
 								for (int i = 0; i < numCollectibles; i++)
 									gameData.Collectibles.Add(reader.ReadLine());
+							}
+
+							gameData.StoryProgressions = new HashSet<string>();
+							int numProgressions = reader.ReadLine().ToInt();
+							if (numProgressions > 0)
+							{
+								for (int i = 0; i < numProgressions; i++)
+									gameData.StoryProgressions.Add(reader.ReadLine());
 							}
 
 							int partyMemberCount = reader.ReadLine().ToInt();

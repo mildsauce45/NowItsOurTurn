@@ -27,6 +27,15 @@ public abstract class ConversationItem
 
 public class LineItem : ConversationItem
 {
+	public LineItem()
+	{
+	}
+
+	public LineItem(string text)
+	{
+		Text = text;
+	}
+
 	public static ConversationItem FromXml(XmlNode node)
 	{
 		var newItem = new LineItem();

@@ -1,5 +1,5 @@
 <conversations>
-  <conversation name="intro speach" speaker="archdemon">
+  <conversation name="intro speech" speaker="archdemon">
     <line insertHeroName="true">Ah excellent. Welcome {{hero}}!</line>    
     <line>Long have we been at war with the humans. My soothsayers tell me that their legendary hero has appeared.</line>
     <line>I have called you from the void for one purpose.</line>
@@ -29,6 +29,27 @@
     <line>The soothsayers say that the island kingdom of Baron is where the hero was born.</line>
   </conversation>
   <conversation name="charlock throne ghost" speaker="ghost">
-    <line>Somewhere in this world lie shrines to each of the elements: Fire, Water, Light, Dark, and Martial</line>
+    <line>Somewhere in this world lie shrines to each of the elements: Fire, Water, Light, Dark, and Martial.</line>
+  </conversation>
+  <conversation name="archdemon personal guard" speaker="devilguard">
+    <line>At long last we shall we reveal our true power to the humans. At long last we shall have our revenge!</line>
+  </conversation>
+  <conversation name="stairs devilguard" speaker="devilguard">
+    <line>Long live Archdemon Charon!</line>
+  </conversation>
+  <conversation name="ghost charlock throne" speaker="ghost">
+    <line>This castle used to belong to an ancient human kingdom until we monsters ousted them.</line>
+  </conversation>
+  <conversation name="skeleton charlock east wing" speaker="skeleton">
+    <line>Ever wonder why the humans around here are so weak? As you venture farther afield the humans become more hardy as we haven't managed to spread that far yet.</line>
+  </conversation>
+  <conversation name="tiger charlock west wing" speaker="tiger">
+    <line>The hero and his allies will be searching for the four pieces of legendary equipment said to have belonged to the ancient king Roto.</line>
+  </conversation>
+  <conversation name="charlock entrance guard" speaker="devilguard">
+    <line>Just across the great river lies the heart of the human kingdom, Westmere.</line>    
+  </conversation>
+  <conversation name="golem joins" speaker="golem">
+    <line>**Rumble**  Together we can rid this world of the hero!  **Rumble**</line>
   </conversation>
 </conversations>

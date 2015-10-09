@@ -117,6 +117,9 @@
     <Compile Include="Assets\Scripts\FirstWave.Niot\GameStart\InitialMenu.cs" />
     <Compile Include="Assets\Scripts\FirstWave.Niot\GameStart\SavedGameSelection.cs" />
     <Compile Include="Assets\Scripts\FirstWave.Niot\Player.cs" />
+    <Compile Include="Assets\Scripts\FirstWave.Niot\Progression\DialogProgression.cs" />
+    <Compile Include="Assets\Scripts\FirstWave.Niot\Progression\ProgressionTrigger.cs" />
+    <Compile Include="Assets\Scripts\FirstWave.Niot\Progression\StoryTrigger.cs" />
     <Compile Include="Assets\Scripts\FirstWave.Niot\ScriptableObjectDatabase.cs" />
     <Compile Include="Assets\Scripts\FirstWave.Niot\Tiles\SaveTile.cs" />
     <Compile Include="Assets\Scripts\FirstWave.Niot\Weapon.cs" />
@@ -159,6 +162,7 @@
     <Compile Include="Assets\Scripts\Interactables\Interactable.cs" />
     <Compile Include="Assets\Scripts\Interactables\NPC.cs" />
     <Compile Include="Assets\Scripts\Interactables\Sign.cs" />
+    <Compile Include="Assets\Scripts\Interactables\WitchDoctor.cs" />
     <Compile Include="Assets\Scripts\Managers\AbilityManager.cs" />
     <Compile Include="Assets\Scripts\Managers\ConversationManager.cs" />
     <Compile Include="Assets\Scripts\Managers\EnemyManager.cs" />
@@ -172,7 +176,6 @@
     <None Include="Assets\Resources\Abilities.xml" />
     <None Include="Assets\Resources\Enemies.xml" />
     <None Include="Assets\Resources\Conversations.xml" />
-    <None Include="Assets\Sprites\GreyScaleShader.shader" />
     <Reference Include="UnityEngine.UI">
       <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
     </Reference>
