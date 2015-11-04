@@ -39,6 +39,9 @@ namespace FirstWave.Niot.Managers
 		public Directions direction;
 		public string sceneToLoad;
 
+		public string[] enemiesToFight;
+		public string postFightProgression;
+
 		void Awake()
 		{
 			if (Instance == null)

@@ -55,6 +55,20 @@
     </range>
   </ability>
 
+  <ability name="Slice &amp; Dice" description="foo" icon="sword" elementType="Martial" targetType="Single" abilityType="Physical" basePower="7" cooldown="2">
+    <range>
+      <low>9</low>
+      <high>12</high>
+    </range>
+  </ability>
+
+  <ability name="Cleave" description="foo" iconm="sword" elementType="Martial" targetType="All" abilityType="Physical" basePower="5" cooldown="4">
+    <range>
+      <low>5</low>
+      <high>12</high>
+    </range>
+  </ability>
+
   <ability name="Cauterize the Wound" description="" icon="FlameSword" finisher="true" basePower="7" abilityType="Physical">
     <fieldEffectCost elementType="Martial" number="2"/>
     <fieldEffectCost elementType="Fire" number="2"/>

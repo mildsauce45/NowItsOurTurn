@@ -1,5 +1,5 @@
 ﻿<weapons>
-  <weapon id="1" name="Honed Claws" power="4" magicPower="2" value="20"/>
-  <weapon id="2" name="Blorb Staff" power="2" magicPower="5" value="20"/>
-  <weapon id="3" name="Rusty Scythe" power="7" magicPower="0" value="20"/>
+  <weapon id="1" name="Honed Claws" power="5" magicPower="3" value="20"/>
+  <weapon id="2" name="Stone Knuckles" power="7" magicPower="1" value="20"/>
+  <weapon id="3" name="Dusty Tome" power="2" magicPower="6" value="20"/>
 </weapons>

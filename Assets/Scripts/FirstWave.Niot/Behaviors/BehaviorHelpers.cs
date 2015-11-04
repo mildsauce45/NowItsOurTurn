@@ -13,6 +13,13 @@ namespace FirstWave.Niot.Game.Behaviors
 			return livingTargets.OrderBy(p => p.CurrentHP).FirstOrDefault();
 		}
 
+		internal static Combatant GetStrongestTarget(Combatant[] combatants)
+		{
+			var livingTargets = combatants.Where(p => !p.IsDead);
+
+			return livingTargets.OrderByDescending(p => p.CurrentHP).FirstOrDefault();
+		}
+
 		internal static Combatant GetRandomTarget(Combatant[] combatants)
 		{
 			var livingTargets = combatants.Where(p => !p.IsDead);

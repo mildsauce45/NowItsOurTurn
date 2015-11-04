@@ -56,6 +56,12 @@ namespace FirstWave.Niot.Interactables
 				patroller.disableCharacterMotor = false;
 
 			FindObjectOfType<InputManager>().DisableCharacterMotor = false;
+
+			PostDialog();
+		}
+
+		protected virtual void PostDialog()
+		{
 		}
 	}
 }

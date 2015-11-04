@@ -82,7 +82,7 @@ namespace FirstWave.Core.GUI.Dialogs
 
 		void OnGUI()
 		{
-			GUIStyle style = GUIManager.GetMessageBoxStyle(null);
+			GUIStyle style = GUIManager.GetMessageBoxStyle(fontProperties);
 
 			float dialogWidth = Screen.width - (HorizontalOffset * 2);
 

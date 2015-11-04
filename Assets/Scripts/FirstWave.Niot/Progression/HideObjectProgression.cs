@@ -1,4 +1,5 @@
 ﻿using FirstWave.Niot.Managers;
+using FirstWave.TileMap;
 using UnityEngine;
 
 namespace FirstWave.Niot.Progression
@@ -9,8 +10,11 @@ namespace FirstWave.Niot.Progression
 
 		public override void Trigger(string progression)
 		{
+			if (GetComponent<Impassable>())
+				FindObjectOfType<MapManager>().Remove(GetComponent<Impassable>());
+
 			if (toRemove)
-				Destroy(toRemove.gameObject);
+				Destroy(toRemove.gameObject);			
 
 			if (!string.IsNullOrEmpty(progression))
 				GameStateManager.Instance.GameData.StoryProgressions.Add(progression);

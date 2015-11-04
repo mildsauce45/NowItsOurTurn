@@ -11,6 +11,13 @@ namespace FirstWave.Niot.Managers
 		public IDictionary<Vector3, Interactable> Interactables { get; private set; }
 		public IDictionary<Vector3, EventTile> EventTiles { get; private set; }
 
+		public IList<Impassable> RemoveAfterLoad { get; private set; }
+
+		public MapManager()
+		{
+			RemoveAfterLoad = new List<Impassable>();
+		}
+
 		public Boat Boat { get; private set; }
 
 		public string sceneName;		
@@ -67,6 +74,12 @@ namespace FirstWave.Niot.Managers
 			var boat = FindObjectOfType<Boat>();
 			if (boat != null)
 				Boat = boat;
+
+			if (RemoveAfterLoad != null && RemoveAfterLoad.Any())
+			{
+				foreach (var i in RemoveAfterLoad.ToList())
+					Remove(i);
+			}
 		}
 
 		/// <summary>
@@ -87,6 +100,29 @@ namespace FirstWave.Niot.Managers
 					{
 						Interactables.Remove(location);
 						Interactables.Add(i.gameObject.transform.position, i.GetComponent<Interactable>());
+					}
+					break;
+				}
+			}
+		}
+
+		public void Remove(Impassable i)
+		{
+			if (Impassables == null)
+			{
+				RemoveAfterLoad.Add(i);
+				return;
+			}
+
+			foreach (var location in Impassables.Keys.ToList())
+			{
+				if (Impassables[location] == i)
+				{
+					Impassables.Remove(location);
+
+					if (i.GetComponent<Interactable>())
+					{
+						Interactables.Remove(location);
 					}
 					break;
 				}

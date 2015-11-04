@@ -22,6 +22,10 @@ namespace FirstWave.Niot.Battle
 		public override void Update()
 		{
 			// Display some message regarding the new XP, gold, and perhaps levels the players have now
+
+			if (!string.IsNullOrEmpty(TransitionManager.Instance.postFightProgression))
+				GameStateManager.Instance.GameData.StoryProgressions.Add(TransitionManager.Instance.postFightProgression);
+
 			Application.LoadLevel(TransitionManager.Instance.sceneToLoad);
 		}
 

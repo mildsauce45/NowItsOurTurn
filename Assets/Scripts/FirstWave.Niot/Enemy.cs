@@ -65,15 +65,15 @@ namespace FirstWave.Niot.Game
 			this.Strength = toClone.Strength;
 			this.Experience = toClone.Experience;
 			this.Gold = toClone.Gold;
-			this.BehaviorType = toClone.BehaviorType;
-
-			CreateBehavior();
+			this.BehaviorType = toClone.BehaviorType;			
 
 			if (toClone.EquippedAbilities != null)
 				this.EquippedAbilities = toClone.EquippedAbilities.Select(a => a.Clone()).ToArray();
 
 			if (toClone.EquippedFinishers != null)
 				this.EquippedFinishers = toClone.EquippedFinishers.Select(a => a.Clone()).ToArray();
+
+			CreateBehavior();
 		}
 
 		private void CreateBehavior()

@@ -49,7 +49,30 @@
   <conversation name="charlock entrance guard" speaker="devilguard">
     <line>Just across the great river lies the heart of the human kingdom, Westmere.</line>    
   </conversation>
-  <conversation name="golem joins" speaker="golem">
+  <conversation name="golem joins" speaker="golem">q
     <line>**Rumble**  Together we can rid this world of the hero!  **Rumble**</line>
+  </conversation>
+  <conversation name="Rimuldar Villager 1 Prefight">
+    <line>Have at thee!</line>
+  </conversation>
+  <conversation name="Rimuldar Villager 2 Prefight">
+    <line>Why can't you monsters just leave us be?!</line>
+  </conversation>
+  <conversation name="Rimuldar Merchant Prefight">
+    <line>Leave! Leave our profits alone!</line>
+    <line>Gyaaaah!</line>
+  </conversation>
+  <conversation name="rimuldar general intro" speaker="general">
+    <line>How dare you come into this town and try to kill us all!</line>
+    <line>I am General Leo and you and your kind have seen the last of your days!</line>
+    <line>Have at thee!</line>
+  </conversation>
+  <conversation name="ghost joins" speaker="ghost">
+    <line>Remember me? You killed me back in Rimuldar. Don't worry I'm not out for revenge. Lord Charon has returned me to this existence so that I can assist you.</line>
+    <line>Together we can destroy the humans and bring honor to the Archdemon.</line>
+  </conversation>
+  <conversation name="kol golem guardian">
+    <line>**Rumble**  We'll hold off any human resistance here.  **Rumble**</line>
+    <line>**Rumble**  Go sack the town of Rimuldar to the south.  **Rumble**</line>
   </conversation>
 </conversations>

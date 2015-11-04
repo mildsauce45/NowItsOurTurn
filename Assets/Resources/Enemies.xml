@@ -19,4 +19,20 @@
     </abilities>
   </enemy>
   
+  <enemy name="Merchant" hp="40" speed="3" strength="3" will="6" endurance="2" texture="Merchant" xp="15" gold="30" behavior="KillTheWeakest">
+    <abilities>
+      <ability name="Tsunami" />
+      <ability name="Cleave" />
+    </abilities>
+  </enemy>
+
+  <enemy name="General" hp="60" speed="6" strength="7" will="2" endurance="6" texture="grey-knight" xp="100" gold="100" behavior="RimuldarGeneral">
+    <abilities>
+      <ability name="Press the Advantage"/>
+      <ability name="Slice &amp; Dice"/>
+      <ability name="Cleave"/>
+      <ability name="Solar Beam"/>
+    </abilities>
+  </enemy>
+  
 </enemies>

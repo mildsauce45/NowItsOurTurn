@@ -7,6 +7,7 @@ using FirstWave.Niot.Game.Managers;
 using FirstWave.StateMachine;
 using FirstWave.StateMachine.Unity;
 using UnityEngine;
+using FirstWave.Niot.Managers;
 
 public class TurnBasedBattleManager : Singleton<TurnBasedBattleManager>
 {
@@ -24,7 +25,7 @@ public class TurnBasedBattleManager : Singleton<TurnBasedBattleManager>
 	// Use this for initialization
 	void Start()
 	{
-		var combatants = this.InitializeBattle();
+		var combatants = InitializeBattle();
 
 		Party = combatants.Item1;
 		EnemyParty = combatants.Item2;
@@ -152,10 +153,23 @@ public class TurnBasedBattleManager : Singleton<TurnBasedBattleManager>
 		players[2].Endurance = 8;
 		players[2].Weapon = WeaponManager.Instance.GetWeapon(3);
 
-		var enemies = new Enemy[3];
+		Enemy[] enemies = null;
 
-		for (int i = 0; i < enemies.Length; i++)
-			enemies[i] = EnemyManager.Instance.GetEnemy(Random.Range(0, 3));
+		if (TransitionManager.Instance.enemiesToFight != null && TransitionManager.Instance.enemiesToFight.Any())
+		{
+			enemies = new Enemy[TransitionManager.Instance.enemiesToFight.Length];
+
+			for (int i = 0; i < TransitionManager.Instance.enemiesToFight.Length; i++)
+				enemies[i] = EnemyManager.Instance.GetEnemy(TransitionManager.Instance.enemiesToFight[i]);
+
+		}
+		else
+		{
+			enemies = new Enemy[3];
+
+			for (int i = 0; i < enemies.Length; i++)
+				enemies[i] = EnemyManager.Instance.GetEnemy(Random.Range(0, 3));
+		}
 
 		FieldEffect = new ElementType[Constants.Ranges.FIELD_EFFECT_SIZE];
 

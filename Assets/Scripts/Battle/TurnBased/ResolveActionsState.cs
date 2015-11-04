@@ -122,6 +122,11 @@ namespace FirstWave.Niot.Battle
 					if (!command.Ability.IsFinisher || UseFinisher(command.Actor, command.Ability))
 						UseAbility(command.Actor, command.Ability, combatant);
 				}
+				else
+				{
+					ProceedToNextCommand();
+					return;
+				}
 			}
 			else if (command.Target.TargetType == TargetTypes.All)
 			{
@@ -247,7 +252,7 @@ namespace FirstWave.Niot.Battle
 				while (!textTimer.IsComplete)
 					yield return new WaitForSeconds(messageBox.characterDelay);
 
-				yield return new WaitForSeconds(delayTimer);
+				yield return new WaitForSeconds(delayTimer);				
 			}
 			else
 			{
@@ -275,9 +280,11 @@ namespace FirstWave.Niot.Battle
 					SetNewTextOnTimer(string.Format("{0} dies!", target.Name));
 
 					while (!textTimer.IsComplete)
+					{
 						yield return new WaitForSeconds(messageBox.characterDelay);
+					}
 
-					yield return new WaitForSeconds(delayTimer);
+					yield return new WaitForSeconds(delayTimer);					
 				}
 			}
 

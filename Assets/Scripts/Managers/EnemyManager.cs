@@ -4,6 +4,7 @@ using FirstWave.Core.Extensions;
 using FirstWave.Xml;
 using FirstWave.Xml.Documents;
 using UnityEngine;
+using System.Xml;
 
 namespace FirstWave.Niot.Game.Managers
 {
@@ -54,29 +55,29 @@ namespace FirstWave.Niot.Game.Managers
 
 			var enemiesAsset = Resources.Load("Enemies") as TextAsset;
 
-			var parser = new XmlParser();
-			var doc = parser.Doc(enemiesAsset.text);
+			var doc = new XmlDocument();
+			doc.LoadXml(enemiesAsset.text);
 
-			var enemiesNodes = doc.Value.Root.Children.Where(n => n.Name == "enemy");
+			var enemiesNodes = doc.FirstChild.ChildNodes.OfType<XmlNode>().Where(n => n.Name == "enemy");
 
 			foreach (var enemyNode in enemiesNodes)
 			{
-				var name = enemyNode["name"].Value;
+				var name = enemyNode.GetAttributeValue("name");
 
-				var maxHP = enemyNode["hp"].Value.ToInt();
+				var maxHP = enemyNode.GetAttributeValue("hp").ToInt();
 
 				var enemy = new Enemy(name, maxHP);
 
-				enemy.Speed = enemyNode["speed"].Value.ToInt();
-				enemy.Strength = enemyNode["strength"].Value.ToInt();
-				enemy.Will = enemyNode["will"].Value.ToInt();
-				enemy.Endurance = enemyNode["endurance"].Value.ToInt();
+				enemy.Speed = enemyNode.GetAttributeValue("speed").ToInt();
+				enemy.Strength = enemyNode.GetAttributeValue("strength").ToInt();
+				enemy.Will = enemyNode.GetAttributeValue("will").ToInt();
+				enemy.Endurance = enemyNode.GetAttributeValue("endurance").ToInt();
 
-				enemy.Experience = enemyNode["xp"].Value.ToInt();
-				enemy.Gold = enemyNode["gold"].Value.ToInt();
-				enemy.BehaviorType = enemyNode["behavior"].Value;
+				enemy.Experience = enemyNode.GetAttributeValue("xp").ToInt();
+				enemy.Gold = enemyNode.GetAttributeValue("gold").ToInt();
+				enemy.BehaviorType = enemyNode.GetAttributeValue("behavior");
 
-				var textureString = enemyNode["texture"].Value;
+				var textureString = enemyNode.GetAttributeValue("texture");
 				if (!string.IsNullOrEmpty(textureString))
 				{
 					var texture = Resources.Load("Images/Enemies/" + textureString) as Texture2D;
@@ -90,17 +91,17 @@ namespace FirstWave.Niot.Game.Managers
 			}
 		}
 
-		private void ParseAbilities(Enemy enemy, Node enemyNode)
+		private void ParseAbilities(Enemy enemy, XmlNode enemyNode)
 		{
-			var abilitiesNode = enemyNode.Children.FirstOrDefault(x => x.Name == "abilities");
+			var abilitiesNode = enemyNode.ChildNodes.OfType<XmlNode>().FirstOrDefault(x => x.Name == "abilities");
 			if (abilitiesNode == null)
 				return;
 
 			var knownAbilities = new List<Ability>();
 
-			foreach (var abilityNode in abilitiesNode.Children)
+			foreach (var abilityNode in abilitiesNode.ChildNodes.OfType<XmlNode>())
 			{
-				var abilityName = abilityNode["name"].Value;
+				var abilityName = abilityNode.GetAttributeValue("name");
 
 				var ability = AbilityManager.Instance.GetAbility(abilityName);
 				if (ability != null)

@@ -40,6 +40,12 @@ namespace FirstWave.Niot.Progression
 
 			if (!string.IsNullOrEmpty(progression))
 				GameStateManager.Instance.GameData.StoryProgressions.Add(progression);
+
+			OnPostDialog();
+		}
+
+		protected virtual void OnPostDialog()
+		{
 		}
 	}
 }

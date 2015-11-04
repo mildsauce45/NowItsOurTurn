@@ -97,9 +97,9 @@ namespace FirstWave.Niot.Game.Managers
 			if (!string.IsNullOrEmpty(cooldown))
 				ability.Cooldown = cooldown.ToInt();
 
-			ability.ElementType = abilityNode.GetEnumAttributeValue<ElementType>("elementType", ElementType.None);
-			ability.TargetType = abilityNode.GetEnumAttributeValue<TargetTypes>("targetType", TargetTypes.Single);
-			ability.AbilityType = abilityNode.GetEnumAttributeValue<AbilityType>("abilityType", AbilityType.Physical);
+			ability.ElementType = abilityNode.GetEnumAttributeValue("elementType", ElementType.None);
+			ability.TargetType = abilityNode.GetEnumAttributeValue("targetType", TargetTypes.Single);
+			ability.AbilityType = abilityNode.GetEnumAttributeValue("abilityType", AbilityType.Physical);
 
 			var iconString = abilityNode.GetAttributeValue("icon");
 			if (!string.IsNullOrEmpty(iconString))

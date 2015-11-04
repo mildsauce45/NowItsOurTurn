@@ -1,7 +1,6 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using FirstWave.Core.Extensions;
 using FirstWave.Core.GUI.Dialogs;
-using FirstWave.Core.Extensions;
+using UnityEngine;
 
 public class Sign : Interactable
 {
