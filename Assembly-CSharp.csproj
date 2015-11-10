@@ -168,6 +168,7 @@
      <Compile Include="Assets\Scripts\Interactables\Interactable.cs" />
      <Compile Include="Assets\Scripts\Interactables\NPC.cs" />
      <Compile Include="Assets\Scripts\Interactables\Sign.cs" />
+     <Compile Include="Assets\Scripts\Interactables\SmallDoor.cs" />
      <Compile Include="Assets\Scripts\Interactables\StartFightNPC.cs" />
      <Compile Include="Assets\Scripts\Interactables\WitchDoctor.cs" />
      <Compile Include="Assets\Scripts\Managers\AbilityManager.cs" />

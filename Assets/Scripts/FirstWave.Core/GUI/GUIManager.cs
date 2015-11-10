@@ -16,6 +16,7 @@ namespace FirstWave.Core.GUI
 				style.normal.textColor = fontProperties.fontColor;
 				style.font = fontProperties.font;
 				style.fontSize = fontProperties.fontSize;
+				style.wordWrap = true;
 			}
 
 			return style;

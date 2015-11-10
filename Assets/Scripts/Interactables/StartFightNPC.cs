@@ -6,8 +6,9 @@ namespace Assets.Scripts.Interactables
 {
 	public class StartFightNPC : NPC
 	{
+		public bool isBoss;
 		public string[] enemies;
-		public string postFightProgression;
+		public string postFightProgression;		
 
 		protected override void PostDialog()
 		{

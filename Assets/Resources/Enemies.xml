@@ -34,5 +34,14 @@
       <ability name="Solar Beam"/>
     </abilities>
   </enemy>
+
+  <enemy name="King Loric" hp="200" speed="7" strength="6" will="5" endurance="8" texture="KingLoric" xp="1000" gold="2000" behavior="AllOut">
+    <abilities>
+      <ability name="Cleave"/>
+      <ability name="Solar Beam"/>
+      <ability name="Tsunami"/>
+      <ability name="Fireball"/>
+    </abilities>
+  </enemy>
   
 </enemies>

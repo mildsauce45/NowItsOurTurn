@@ -75,4 +75,13 @@
     <line>**Rumble**  We'll hold off any human resistance here.  **Rumble**</line>
     <line>**Rumble**  Go sack the town of Rimuldar to the south.  **Rumble**</line>
   </conversation>
+  
+  <!-- DEMO CONVERSATIONS -->
+  <conversation name="demo king of baron">
+    <line>I congratulate you on making it this far!</line>
+    <line>Unfortunately the hero you've been searching for has already come and gone.</line>
+    <line>He has the legendary sword, Tizon, and with it he will end your filthy line!</line>
+    <line>Alas, you will not be around to see that come to pass.</line>
+    <line>Have at thee!</line>
+  </conversation>
 </conversations>
