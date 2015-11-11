@@ -61,5 +61,13 @@ namespace FirstWave.Core.Utilities
 
 			return false;
 		}
+
+		public override int GetHashCode()
+		{
+			if (HasValue)
+				return 0;
+
+			return Value.GetHashCode();
+		}
 	}
 }

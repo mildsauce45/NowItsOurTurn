@@ -1,9 +1,5 @@
 ﻿using FirstWave.Niot.Managers;
 using FirstWave.TileMap;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using UnityEngine;
 
 namespace FirstWave.Niot.Interactables
@@ -12,6 +8,7 @@ namespace FirstWave.Niot.Interactables
 	{
 		public Sprite openSprite;
 		public Sprite closedSprite;
+		public string requiredKey;
 
 		private bool isOpen;
 		private MapManager mapManager;
@@ -19,7 +16,7 @@ namespace FirstWave.Niot.Interactables
 
 		public override bool AllowInteraction
 		{
-			get { return !isOpen; }
+			get { return !isOpen && (string.IsNullOrEmpty(requiredKey) || PlayerHasKey(requiredKey)); }
 		}
 
 		public override bool DisableCharacterMotor
@@ -39,7 +36,14 @@ namespace FirstWave.Niot.Interactables
 			{
 				spriteRenderer.sprite = openSprite;
 				mapManager.Remove(GetComponent<Impassable>());
+
+				isOpen = true;
 			}
+		}
+
+		private bool PlayerHasKey(string key)
+		{
+			return GameStateManager.Instance.GameData.Collectibles.Contains(key);
 		}
 	}
 }

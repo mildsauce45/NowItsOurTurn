@@ -20,7 +20,7 @@ public class CameraFollow : MonoBehaviour {
 		return Mathf.Abs(transform.position.y - player.position.y) > yMargin;
 	}
 
-	void Update () {
+	void LateUpdate () {
 		TrackPlayer();
 	}
 

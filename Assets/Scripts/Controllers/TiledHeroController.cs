@@ -37,6 +37,12 @@ public class TiledHeroController : MonoBehaviour
 			MyMovement();
 	}
 
+	public void SetTarget(Vector3 newTarget)
+	{
+		target = newTarget;
+		IsMoving = false;
+	}
+
 	public void SetDirection(Directions direction)
 	{
 		float x = 0f;

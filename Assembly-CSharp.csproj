@@ -145,6 +145,7 @@
      <Compile Include="Assets\Scripts\FirstWave.TileMap\MapManager.cs" />
      <Compile Include="Assets\Scripts\FirstWave.TileMap\Patroller.cs" />
      <Compile Include="Assets\Scripts\FirstWave.TileMap\SceneLoader.cs" />
+     <Compile Include="Assets\Scripts\FirstWave.TileMap\TeleportTile.cs" />
      <Compile Include="Assets\Scripts\FirstWave.TileMap\Water.cs" />
      <Compile Include="Assets\Scripts\FirstWave.Xml\BasicParser.cs" />
      <Compile Include="Assets\Scripts\FirstWave.Xml\CharParser.cs" />
