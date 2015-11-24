@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using FirstWave.Core.Extensions;
-using FirstWave.Xml;
-using FirstWave.Xml.Documents;
 using UnityEngine;
 using System.Xml;
 

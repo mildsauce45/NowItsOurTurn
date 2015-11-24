@@ -24,7 +24,14 @@ namespace FirstWave.Core.GUI.Menus
 		public float inputDelay = 0.125f;
 		public float itemPadding = 10f;
 
+		#region Events & Delegates
+
 		public event EventHandler Canceled;
+
+		public delegate void SelectionChangedHandler(MenuItem newSelection);
+		public event SelectionChangedHandler SelectionChanged;
+
+		#endregion
 
 		private InputTimer inputTimer;
 
@@ -82,7 +89,7 @@ namespace FirstWave.Core.GUI.Menus
 
 		void OnGUI()
 		{
-			if (this.menuItems == null || !this.menuItems.Any())
+			if (menuItems == null || !menuItems.Any())
 				return;
 
 			var style = GUIManager.GetMessageBoxStyle(fontProperties);
@@ -131,7 +138,10 @@ namespace FirstWave.Core.GUI.Menus
 			menuItems.Add(menuItem);
 
 			if (currentOption < 0)
+			{
 				currentOption = 0;
+				SafeRaiseSelectionChanged();
+			}
 		}
 
 		public void SetSelectedIndex(int newIndex)
@@ -140,6 +150,11 @@ namespace FirstWave.Core.GUI.Menus
 				return;
 
 			currentOption = newIndex;
+		}
+
+		public int GetIndex(MenuItem menuItem)
+		{
+			return menuItems.IndexOf(menuItem);
 		}
 
 		#endregion
@@ -155,6 +170,8 @@ namespace FirstWave.Core.GUI.Menus
 
 			previous = true;
 			next = false;
+
+			SafeRaiseSelectionChanged();
 		}
 
 		private void SelectNextItem()
@@ -163,6 +180,8 @@ namespace FirstWave.Core.GUI.Menus
 
 			previous = false;
 			next = true;
+
+			SafeRaiseSelectionChanged();
 		}
 
 		private float GetXLocation()
@@ -193,6 +212,12 @@ namespace FirstWave.Core.GUI.Menus
 				return Screen.width - margin.left - margin.right;
 
 			return size.x;
+		}
+
+		private void SafeRaiseSelectionChanged()
+		{
+			if (SelectionChanged != null && currentOption > -1 && currentOption < menuItems.Count)
+				SelectionChanged(menuItems[currentOption]);
 		}
 
 		#endregion

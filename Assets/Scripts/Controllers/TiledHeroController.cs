@@ -1,5 +1,7 @@
 ﻿using FirstWave.Niot.Managers;
 using FirstWave.TileMap;
+using FristWave.Niot.GUI;
+using FirstWave.Core.Extensions;
 using UnityEngine;
 
 public class TiledHeroController : MonoBehaviour
@@ -10,6 +12,7 @@ public class TiledHeroController : MonoBehaviour
 
 	public Transform InteractionCheck;
 	public LayerMask InteractionLayer;
+	public GameObject menuPrefab;
 
 	private Vector3 target;
 	private MapManager mapManager;
@@ -33,6 +36,8 @@ public class TiledHeroController : MonoBehaviour
 
 		if (!IsMoving && inputManager.KeyReleased("Interact"))
 			HandleInteraction();
+		else if (!IsMoving && inputManager.KeyReleased("Menu"))
+			MainMenu();
 		else
 			MyMovement();
 	}
@@ -78,7 +83,7 @@ public class TiledHeroController : MonoBehaviour
 			Vector3 newPosition = Vector3.MoveTowards(transform.position, target, Time.deltaTime * MoveSpeed);
 
 			// At a certain point just clamp this down
-			if ((newPosition - target).magnitude < 0.025f)
+			if ((newPosition - target).magnitude < 0.0125f)
 			{
 				transform.position = target;
 				IsMoving = false;
@@ -168,5 +173,13 @@ public class TiledHeroController : MonoBehaviour
 				i.Interact();
 			}
 		}
+	}
+
+	private void MainMenu()
+	{
+		var menu = menuPrefab.Instantiate().GetComponent<MainMenu>();		
+
+		menu.initiator = this;
+		menu.enabled = true;
 	}
 }

@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using FirstWave.Core.Extensions;
-using FirstWave.Xml;
-using FirstWave.Xml.Documents;
 using UnityEngine;
+using System.Xml;
 
 namespace FirstWave.Niot.Game.Managers
 {
@@ -44,9 +43,10 @@ namespace FirstWave.Niot.Game.Managers
 
 			var weaponsAsset = Resources.Load("Weapons") as TextAsset;
 
-			var doc = new XmlParser().Doc(weaponsAsset.text);
+			var doc = new XmlDocument();
+			doc.LoadXml(weaponsAsset.text);
 
-			var weaponNodes = doc.Value.Root.Children.Where(w => w.Name == "weapon");
+			var weaponNodes = doc.FirstChild.ChildNodes.OfType<XmlNode>().Where(w => w.Name == "weapon");
 
 			foreach (var weaponNode in weaponNodes)
 			{
@@ -57,15 +57,15 @@ namespace FirstWave.Niot.Game.Managers
 			}
 		}
 
-		private Weapon CreateWeapon(Node weaponNode)
+		private Weapon CreateWeapon(XmlNode weaponNode)
 		{
 			var weapon = new Weapon();
 
-			weapon.Id = weaponNode["id"].Value.ToInt();
-			weapon.Name = weaponNode["name"].Value;
-			weapon.Power = weaponNode["power"].Value.ToInt();
-			weapon.MagicPower = weaponNode["magicPower"].Value.ToInt();
-			weapon.Value = weaponNode["value"].Value.ToInt();
+			weapon.Id = weaponNode.GetAttributeValue("id").ToInt();
+			weapon.Name = weaponNode.GetAttributeValue("name");
+			weapon.Power = weaponNode.GetAttributeValue("power").ToInt();
+			weapon.MagicPower = weaponNode.GetAttributeValue("magicPower").ToInt();
+			weapon.Value = weaponNode.GetAttributeValue("value").ToInt();
 
 			return weapon;
 		}

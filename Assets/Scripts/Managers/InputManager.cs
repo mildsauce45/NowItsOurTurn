@@ -27,11 +27,9 @@ public class InputManager : Singleton<InputManager>
 		currentState.Clear();
 
 		// Now handle each key we care about
-		currentState.Add("Ability1", Input.GetButton("Ability1"));
-		currentState.Add("Ability2", Input.GetButton("Ability2"));
-		currentState.Add("Ability3", Input.GetButton("Ability3"));
 		currentState.Add("Interact", Input.GetButton("Interact"));
         currentState.Add("Cancel", Input.GetButton("Cancel"));
+		currentState.Add("Menu", Input.GetButton("Menu"));
 	}
 
 	public bool KeyReleased(string key)

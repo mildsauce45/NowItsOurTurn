@@ -12,7 +12,7 @@
 	<AssemblyName>Assembly-CSharp</AssemblyName>
 	<TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
 	<FileAlignment>512</FileAlignment>
-  </PropertyGroup>
+	</PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
 	<DebugSymbols>true</DebugSymbols>
 	<DebugType>full</DebugType>
@@ -146,14 +146,6 @@
      <Compile Include="Assets\Scripts\FirstWave.TileMap\SceneLoader.cs" />
      <Compile Include="Assets\Scripts\FirstWave.TileMap\TeleportTile.cs" />
      <Compile Include="Assets\Scripts\FirstWave.TileMap\Water.cs" />
-     <Compile Include="Assets\Scripts\FirstWave.Xml\BasicParser.cs" />
-     <Compile Include="Assets\Scripts\FirstWave.Xml\CharParser.cs" />
-     <Compile Include="Assets\Scripts\FirstWave.Xml\Documents\Attribute.cs" />
-     <Compile Include="Assets\Scripts\FirstWave.Xml\Documents\Document.cs" />
-     <Compile Include="Assets\Scripts\FirstWave.Xml\Documents\Node.cs" />
-     <Compile Include="Assets\Scripts\FirstWave.Xml\Parser.cs" />
-     <Compile Include="Assets\Scripts\FirstWave.Xml\ParserExtensions.cs" />
-     <Compile Include="Assets\Scripts\FirstWave.Xml\XmlParser.cs" />
      <Compile Include="Assets\Scripts\GUI\BackgroundSprite.cs" />
      <Compile Include="Assets\Scripts\GUI\Controls\Battle\AbilityMenu.cs" />
      <Compile Include="Assets\Scripts\GUI\Controls\Battle\AbilityMenuItem.cs" />
@@ -161,6 +153,12 @@
      <Compile Include="Assets\Scripts\GUI\Controls\Battle\FieldEffectDisplay.cs" />
      <Compile Include="Assets\Scripts\GUI\Controls\Battle\PartyInformationDisplay.cs" />
      <Compile Include="Assets\Scripts\GUI\Controls\BorderedLabel.cs" />
+     <Compile Include="Assets\Scripts\GUI\Controls\MainMenu\HorizontalMenu.cs" />
+     <Compile Include="Assets\Scripts\GUI\Controls\MainMenu\PartyStatusPanel.cs" />
+     <Compile Include="Assets\Scripts\GUI\MainMenu.cs" />
+     <Compile Include="Assets\Scripts\GUI\MenuState\MainMenuTrigger.cs" />
+     <Compile Include="Assets\Scripts\GUI\MenuState\StatusState.cs" />
+     <Compile Include="Assets\Scripts\GUI\MenuState\TopMenuState.cs" />
      <Compile Include="Assets\Scripts\GUI\SpriteFunctions.cs" />
      <Compile Include="Assets\Scripts\Interactables\CastleDoor.cs" />
      <Compile Include="Assets\Scripts\Interactables\CastleDoorInteractable.cs" />
@@ -198,6 +196,6 @@
   </Target>
   <Target Name="AfterBuild">
   </Target>
-  -->
+  -->  
 
 </Project>

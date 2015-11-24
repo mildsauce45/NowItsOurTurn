@@ -136,18 +136,6 @@ namespace FirstWave.Niot.Game.Data
 			return false;
 		}
 
-		private static void CreateDataFile()
-		{
-			try
-			{
-				var stream = File.Create(SAVE_DATA_LOCATION);				
-			}
-			catch (Exception)
-			{
-				Debug.LogError("Could not create save file at " + SAVE_DATA_LOCATION);
-			}
-		}
-
 		#endregion
 	}
 }

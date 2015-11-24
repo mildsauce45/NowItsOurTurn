@@ -16,9 +16,26 @@ namespace FirstWave.Niot.Game.Data
 		/// </summary>
 		private const int VERSION = 1;
 
+		private const int GOLD_MAX = 9999999;
+
 		public Player[] Party { get; private set; }
 
-		public int Gold { get; set; }
+		private int gold;
+
+		/// <summary>
+		/// There is an imposed maximum of 9,999,999
+		/// </summary>
+		public int Gold
+		{
+			get { return gold; }
+			set
+			{
+				gold = value;
+
+				if (gold > GOLD_MAX)
+					gold = GOLD_MAX;
+            }
+		}
 
 		public HashSet<string> Collectibles { get; set; }
 		public HashSet<string> StoryProgressions { get; set; }
