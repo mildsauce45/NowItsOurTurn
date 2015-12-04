@@ -6,9 +6,9 @@ namespace Assets.Scripts.Interactables
 {
 	public class StartFightNPC : NPC
 	{
-		public bool isBoss;
 		public string[] enemies;
 		public string postFightProgression;		
+		public AudioClip musicOverride;
 
 		protected override void PostDialog()
 		{
@@ -16,6 +16,7 @@ namespace Assets.Scripts.Interactables
 			TransitionManager.Instance.postFightProgression = postFightProgression;
 			TransitionManager.Instance.sceneToLoad = FindObjectOfType<MapManager>().sceneName;
 			TransitionManager.Instance.playerPosition = FindObjectOfType<TiledHeroController>().transform.position;
+			TransitionManager.Instance.musicOverride = musicOverride;
 
 			Application.LoadLevel("TurnBasedBattle");
 		}

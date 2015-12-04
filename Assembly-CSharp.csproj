@@ -118,6 +118,7 @@
      <Compile Include="Assets\Scripts\FirstWave.Niot\GameStart\InitialMenu.cs" />
      <Compile Include="Assets\Scripts\FirstWave.Niot\GameStart\SavedGameSelection.cs" />
      <Compile Include="Assets\Scripts\FirstWave.Niot\Player.cs" />
+     <Compile Include="Assets\Scripts\FirstWave.Niot\Progression\CollectibleProgression.cs" />
      <Compile Include="Assets\Scripts\FirstWave.Niot\Progression\DialogProgression.cs" />
      <Compile Include="Assets\Scripts\FirstWave.Niot\Progression\GhostJoinsProgression.cs" />
      <Compile Include="Assets\Scripts\FirstWave.Niot\Progression\GolemJoinsProgression.cs" />

@@ -34,7 +34,7 @@ namespace FirstWave.Game.GameStart
 			//Application.LoadLevel("ThroneRoomFloor");
 
 			// For the demo
-			Application.LoadLevel("BaronExterior");
+			Application.LoadLevel("DemoOverworld");
 		}
 
 		private void LoadExistingGame()

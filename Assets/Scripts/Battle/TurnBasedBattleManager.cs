@@ -165,6 +165,7 @@ public class TurnBasedBattleManager : Singleton<TurnBasedBattleManager>
 		}
 		else
 		{
+			// This section is for debugging purposes. In practice we'll always pass in the enemies we're fighting
 			enemies = new Enemy[3];
 
 			for (int i = 0; i < enemies.Length; i++)
@@ -175,6 +176,13 @@ public class TurnBasedBattleManager : Singleton<TurnBasedBattleManager>
 
 		for (int i = 0; i < FieldEffect.Length; i++)
 			FieldEffect[i] = ElementType.None;
+
+		var source = FindObjectOfType<AudioSource>();
+
+		if (TransitionManager.Instance.musicOverride)
+			source.clip = TransitionManager.Instance.musicOverride;		
+
+		source.Play();
 
 		return Tuple.Create(players, enemies);
 	}

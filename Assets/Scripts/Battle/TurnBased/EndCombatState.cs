@@ -26,6 +26,8 @@ namespace FirstWave.Niot.Battle
 			if (!string.IsNullOrEmpty(TransitionManager.Instance.postFightProgression))
 				GameStateManager.Instance.GameData.StoryProgressions.Add(TransitionManager.Instance.postFightProgression);
 
+			TransitionManager.Instance.musicOverride = null;
+
 			Application.LoadLevel(TransitionManager.Instance.sceneToLoad);
 		}
 

@@ -84,4 +84,38 @@
     <line>Alas, you will not be around to see that come to pass.</line>
     <line>Have at thee!</line>
   </conversation>
+
+  <conversation name="demo prince of baron">
+    <line>The time has come for you and your kind to die!</line>
+  </conversation>
+
+  <conversation name="demo front gate guard">
+    <line>Baron will never fall at the hands of some fiends!</line>
+  </conversation>
+
+  <conversation name="demo battlefield elemental explanation">
+    <line>Elemental energy exists in all parts of the world and the battlefield is likely infused with some as you being combat.</line>
+    <line>For instance, this land, the island kingdom of Baron, exudes Water elemental energy.</line>
+    <line>Inhabitants of those areas are likely attuned to the surrounding elemental energies and will use techniques that mirror their surroundings.</line>
+    <line>Plan your abilities and attacks accordingly.</line>
+  </conversation>
+
+  <conversation name="demo elemental weaknesses">
+    <line>Fire opposes Water. Light opposes Dark. Martial stands alone.</line>
+  </conversation>
+
+  <conversation name="demo abilities">
+    <line>Most abilities target either all your foes, or single one out.</line>
+    <line>Abilities that target all your foes are usually weaker.</line>
+  </conversation>
+
+  <conversation name="demo control explanation">
+    <line>Walk around using the arrow keys, or WASD.</line>
+    <line>Interact with people and objects with the Spacebar.</line>
+    <line>Bring up the main menu using Enter.</line>
+  </conversation>
+
+  <conversation name="baron prince killed">
+    <line>You have acquired Baron's jail key.</line>
+  </conversation>
 </conversations>

@@ -43,5 +43,16 @@
       <ability name="Fireball"/>
     </abilities>
   </enemy>
+
+  <enemy name="Prince Nafai" hp="1" speed="5" strength="8" will="3" endurance="8" texture="PrinceNafai" xp="1000" gold="1500" behavior="AllOut">
+    <abilities>
+      <ability name="Drown"/>
+      <ability name="Tsunami"/>
+      <ability name="Icebolt"/>
+      <ability name="Slice &amp; Dice"/>
+      <ability name="Frostbite"/>
+      <ability name="Fumarole"/>
+    </abilities>
+  </enemy>
   
 </enemies>

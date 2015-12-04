@@ -20,12 +20,19 @@
     </range>
   </ability>
 
+  <ability name="Icebolt" description="A shard of ice shoots out of your hand and impales your enemy." icon="Icebolt" elementType="Water" targetType="Single" abilityType="Magical" basePower="7" cooldown="4">
+    <range>
+      <low>15</low>
+      <high>25</high>
+    </range>
+  </ability>
+
   <ability name="Tsunami" description="A powerful wave sweeps your foes off of their feet." icon="Tsunami" elementType="Water" targetType="All" abilityType="Magical" basePower="3" cooldown="4">
     <range>
       <low>5</low>
       <high>12</high>
     </range>
-  </ability>
+  </ability>  
 
   <ability name="Solar Beam" description="Lorem Ipsum" icon="SolarBeam" elementType="Light" targetType="Single" abilityType="Magical" basePower="6" cooldown="3">
     <range>
@@ -68,6 +75,8 @@
       <high>12</high>
     </range>
   </ability>
+  
+  <!-- Finishers -->
 
   <ability name="Cauterize the Wound" description="" icon="FlameSword" finisher="true" basePower="7" abilityType="Physical">
     <fieldEffectCost elementType="Martial" number="2"/>
@@ -84,6 +93,14 @@
     <range>
       <low>5</low>
       <high>12</high>
+    </range>
+  </ability>
+
+  <ability name="Frostbite" description="" icon="SteamVent" finisher="true" basePower="15" abilityType="Magical">
+    <fieldEffectCost elementType="Water" number="4"/>
+    <range>
+      <low>30</low>
+      <high>50</high> 
     </range>
   </ability>
 

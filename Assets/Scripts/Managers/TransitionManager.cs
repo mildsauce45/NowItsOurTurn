@@ -41,6 +41,7 @@ namespace FirstWave.Niot.Managers
 
 		public string[] enemiesToFight;
 		public string postFightProgression;
+		public AudioClip musicOverride;
 
 		void Awake()
 		{

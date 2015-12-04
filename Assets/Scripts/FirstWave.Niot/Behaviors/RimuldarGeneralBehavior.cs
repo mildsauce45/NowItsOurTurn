@@ -19,7 +19,7 @@ namespace Assets.Scripts.FirstWave.Niot.Behaviors
 		{
 			me = owner;
 
-			pressTheAdvantage = me.EquippedAbilities.FirstOrDefault(a => a.Name == "Press the Advantage");
+			pressTheAdvantage = me.EquippedFinishers.FirstOrDefault(a => a.Name == "Press the Advantage");
 			solarBeam = me.EquippedAbilities.FirstOrDefault(a => a.Name == "Solar Beam");
 			cleave = me.EquippedAbilities.FirstOrDefault(a => a.Name == "Cleave");
 			sliceAndDice = me.EquippedAbilities.FirstOrDefault(a => a.Name == "Slice & Dice");
