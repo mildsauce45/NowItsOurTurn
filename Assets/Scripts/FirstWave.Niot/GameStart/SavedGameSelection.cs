@@ -3,6 +3,7 @@ using FirstWave.Niot.Game;
 using FirstWave.Niot.Game.Data;
 using FirstWave.Niot.Managers;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace FirstWave.Niot.GameStart
 {
@@ -49,7 +50,7 @@ namespace FirstWave.Niot.GameStart
 			TransitionManager.Instance.playerPosition = data.Location;
 
 			// Load the scene we're supposed to
-			Application.LoadLevel(data.Scene);
+			SceneManager.LoadScene(data.Scene);
 		}
 	}
 }

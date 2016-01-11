@@ -1,7 +1,10 @@
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2008
-
-Project("{EF8362FF-ADF0-00F4-8E82-A966384D366B}") = "8BitRpg", "Assembly-CSharp.csproj", "{3C418026-A9F8-6098-DB8C-5762C5250AAE}"
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{EF8362FF-ADF0-00F4-8E82-A966384D366B}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{3C418026-A9F8-6098-DB8C-5762C5250AAE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirstWave.Unity.Gui", "..\FirstWave.Niot.Gui\FirstWave.Unity.Gui.csproj", "{DC1EBC0C-827C-4BE7-B0C5-310014AFF47F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,21 +16,24 @@ Global
 		{3C418026-A9F8-6098-DB8C-5762C5250AAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C418026-A9F8-6098-DB8C-5762C5250AAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C418026-A9F8-6098-DB8C-5762C5250AAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC1EBC0C-827C-4BE7-B0C5-310014AFF47F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC1EBC0C-827C-4BE7-B0C5-310014AFF47F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC1EBC0C-827C-4BE7-B0C5-310014AFF47F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC1EBC0C-827C-4BE7-B0C5-310014AFF47F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-																																																																																																																													GlobalSection(MonoDevelopProperties) = preSolution
+	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
-		$0.TextStylePolicy = $1
+		$0.TextStylePolicy = $3
 		$1.inheritsSet = null
 		$1.scope = text/x-csharp
 		$0.CSharpFormattingPolicy = $2
 		$2.inheritsSet = Mono
 		$2.inheritsScope = text/x-csharp
 		$2.scope = text/x-csharp
-		$0.TextStylePolicy = $3
 		$3.FileWidth = 120
 		$3.TabWidth = 4
 		$3.IndentWidth = 4
@@ -36,5 +42,4 @@ Global
 		$3.inheritsScope = text/plain
 		$3.scope = text/plain
 	EndGlobalSection
-
 EndGlobal

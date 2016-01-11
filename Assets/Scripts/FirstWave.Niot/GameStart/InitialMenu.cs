@@ -2,6 +2,7 @@
 using FirstWave.Niot.Game.Data;
 using FirstWave.Niot.Managers;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace FirstWave.Game.GameStart
 {
@@ -34,14 +35,14 @@ namespace FirstWave.Game.GameStart
 			//Application.LoadLevel("ThroneRoomFloor");
 
 			// For the demo
-			Application.LoadLevel("DemoOverworld");
+			SceneManager.LoadScene("DemoOverworld");
 		}
 
 		private void LoadExistingGame()
 		{
 			SaveDataHelper.ReadGameData();
 
-			Application.LoadLevel("ContinueGame");
+			SceneManager.LoadScene("ContinueGame");
 		}
 	}
 }

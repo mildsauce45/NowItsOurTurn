@@ -1,5 +1,6 @@
 ﻿using FirstWave.Niot.Managers;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace FirstWave.TileMap
 {
@@ -14,7 +15,7 @@ namespace FirstWave.TileMap
 			TransitionManager.Instance.playerPosition = StartCoordinates;
 			TransitionManager.Instance.direction = InitialFacingDirection;
 
-			Application.LoadLevel(Scene);
+            SceneManager.LoadScene(Scene);
 		}
 	}
 }

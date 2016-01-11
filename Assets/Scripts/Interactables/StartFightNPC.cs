@@ -1,6 +1,7 @@
 ﻿using FirstWave.Niot.Interactables;
 using FirstWave.Niot.Managers;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Assets.Scripts.Interactables
 {
@@ -18,7 +19,7 @@ namespace Assets.Scripts.Interactables
 			TransitionManager.Instance.playerPosition = FindObjectOfType<TiledHeroController>().transform.position;
 			TransitionManager.Instance.musicOverride = musicOverride;
 
-			Application.LoadLevel("TurnBasedBattle");
+            SceneManager.LoadScene("TurnBasedBattle");
 		}
 	}
 }

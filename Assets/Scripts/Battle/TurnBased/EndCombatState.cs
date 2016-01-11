@@ -6,6 +6,7 @@ using FirstWave.Niot.Game;
 using FirstWave.Niot.Managers;
 using FirstWave.StateMachine.Unity;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace FirstWave.Niot.Battle
 {
@@ -28,7 +29,7 @@ namespace FirstWave.Niot.Battle
 
 			TransitionManager.Instance.musicOverride = null;
 
-			Application.LoadLevel(TransitionManager.Instance.sceneToLoad);
+            SceneManager.LoadScene(TransitionManager.Instance.sceneToLoad);
 		}
 
 		public override TurnBasedBattleTriggers? GetTrigger()

@@ -3,6 +3,7 @@ using FirstWave.TileMap;
 using FristWave.Niot.GUI;
 using FirstWave.Core.Extensions;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TiledHeroController : MonoBehaviour
 {
@@ -94,7 +95,7 @@ public class TiledHeroController : MonoBehaviour
 				if (mapManager.encounterChance > 0 && Random.Range(0, 100) <= mapManager.encounterChance)
 				{
 					TransitionManager.Instance.playerPosition = target;
-					Application.LoadLevel("TurnBasedBattle");
+                    SceneManager.LoadScene("TurnBasedBattle");
 				}
 			}
 			else
