@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FirstWave.Niot.Managers;
+using FirstWave.Unity.Core.Input;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -34,6 +36,7 @@ namespace FirstWave.Core.GUI.Menus
 		#endregion
 
 		private InputTimer inputTimer;
+        private InputManager inputManager;
 
 		private bool previous;
 		private bool next;
@@ -47,6 +50,8 @@ namespace FirstWave.Core.GUI.Menus
 		{
 			inputTimer = new InputTimer(inputDelay);
 			inputTimer.Start();
+
+            inputManager = InputManager.Instance;
 		}
 
 		void Update()
@@ -56,13 +61,13 @@ namespace FirstWave.Core.GUI.Menus
 
 			if (inputTimer.IsTimeUp)
 			{
-				if (InputManager.Instance.KeyReleased("Interact"))
+				if (inputManager.KeyReleased("Interact"))
 				{
 					menuItems[currentOption].ClickAction();
 
 					inputTimer.Reset();
 				}
-				else if (InputManager.Instance.KeyReleased("Cancel"))
+				else if (inputManager.KeyReleased("Cancel"))
 				{
 					if (Canceled != null)
 						Canceled(this, EventArgs.Empty);
@@ -71,8 +76,8 @@ namespace FirstWave.Core.GUI.Menus
 				}
 				else
 				{
-					var up = InputManager.Instance.VerticalAxisUp();
-					var down = InputManager.Instance.VerticalAxisDown();
+					var up = inputManager.KeyReleased(InputManager.UP);
+					var down = inputManager.KeyReleased(InputManager.DOWN);
 
 					if (up)
 						SelectPreviousItem();

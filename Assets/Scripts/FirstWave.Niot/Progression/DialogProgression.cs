@@ -1,6 +1,7 @@
 ﻿using FirstWave.Core.Extensions;
 using FirstWave.Core.GUI.Dialogs;
 using FirstWave.Niot.Managers;
+using FirstWave.Unity.Core.Input;
 using UnityEngine;
 
 namespace FirstWave.Niot.Progression

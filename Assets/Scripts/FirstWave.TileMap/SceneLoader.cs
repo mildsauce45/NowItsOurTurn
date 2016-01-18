@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 namespace FirstWave.TileMap
 {
-	public class SceneLoader : EventTile
+    public class SceneLoader : EventTile
 	{
 		public string Scene;
 		public Vector2 StartCoordinates;
@@ -15,7 +15,7 @@ namespace FirstWave.TileMap
 			TransitionManager.Instance.playerPosition = StartCoordinates;
 			TransitionManager.Instance.direction = InitialFacingDirection;
 
-            SceneManager.LoadScene(Scene);
+			SceneManager.LoadScene(Scene);
 		}
 	}
 }

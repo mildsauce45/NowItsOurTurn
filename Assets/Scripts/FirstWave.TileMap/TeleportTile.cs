@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using FirstWave.Core;
+using System.Collections;
 using UnityEngine;
 
 namespace FirstWave.TileMap

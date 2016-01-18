@@ -11,10 +11,7 @@ namespace FirstWave.Niot.Game
 	{
 		private static IList<Type> ENEMY_BEHAVIORS { get; set; }
 
-		public Texture2D Sprite { get; set; }
-
-		// Maybe don't need this, I could just actually use the sprite size
-		public EnemySize Size { get; set; }
+		public Texture2D Sprite { get; set; }		
 
 		public int Experience { get; set; }
 		public int Gold { get; set; }

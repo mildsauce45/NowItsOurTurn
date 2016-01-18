@@ -1,4 +1,6 @@
 ﻿using FirstWave.Core.GUI;
+using FirstWave.Niot.Managers;
+using FirstWave.Unity.Core.Input;
 using UnityEngine;
 
 namespace FirstWave.Core.GUI.Dialogs
@@ -28,8 +30,7 @@ namespace FirstWave.Core.GUI.Dialogs
 		private float inputPassedTime;
 		private float characterDisplayPassedTime;
 		private Conversation conversation;
-
-		private InputManager inputManager;
+        private InputManager inputManager;
 
 		public delegate void CloseAction(string branch);
 		public event CloseAction OnClosed;
@@ -39,7 +40,7 @@ namespace FirstWave.Core.GUI.Dialogs
 			inputPassedTime = 0f;
 			characterDisplayPassedTime = 0f;
 
-			inputManager = FindObjectOfType<InputManager>();
+            inputManager = InputManager.Instance;
 		}
 
 		// Update is called once per frame
@@ -69,9 +70,9 @@ namespace FirstWave.Core.GUI.Dialogs
 					SafeRaiseClose();
 				else if (conversation != null)
 				{
-					if (inputManager.KeyReleased("left"))
+					if (inputManager.KeyReleased(InputManager.LEFT))
 						conversation.PrevChoice();
-					else if (inputManager.KeyReleased("right"))
+					else if (inputManager.KeyReleased(InputManager.RIGHT))
 						conversation.NextChoice();
 				}
 			}
