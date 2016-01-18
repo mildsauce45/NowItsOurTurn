@@ -1,17 +1,16 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using FirstWave.Core.GUI;
-using FirstWave.Core.GUI.Menus;
+﻿using FirstWave.Core.GUI;
 using FirstWave.Niot.Battle.PartyInput;
 using FirstWave.Niot.Game;
 using FirstWave.Niot.GUI.Controls;
 using FirstWave.StateMachine;
 using FirstWave.StateMachine.Unity;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace FirstWave.Niot.Battle
 {
-	public class GetPartyInputState : State<TurnBasedBattleTriggers?>
+    public class GetPartyInputState : State<TurnBasedBattleTriggers?>
 	{
 		public Player[] Party { get; private set; }
 		public Enemy[] Enemies { get; private set; }
@@ -104,9 +103,9 @@ namespace FirstWave.Niot.Battle
 		{
 			currentPlayerIndicator.enabled = false;
 
-			var menu = this.Owner.GetComponentsInChildren<Menu>().FirstOrDefault(m => m.gameObject.name == "ActionMenu");
-			if (menu != null)
-				menu.enabled = false;
+			//var menu = this.Owner.GetComponentsInChildren<Menu>().FirstOrDefault(m => m.gameObject.name == "ActionMenu");
+			//if (menu != null)
+			//	menu.enabled = false;
 
 			var messageBox = this.Owner.GetComponentInChildren<MessageBox>();
 			if (messageBox != null)

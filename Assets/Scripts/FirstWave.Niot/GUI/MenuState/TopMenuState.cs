@@ -1,15 +1,15 @@
 ﻿using FirstWave.Core.GUI;
-using FirstWave.Core.GUI.Menus;
 using FirstWave.Niot.GUI.Controls;
 using FirstWave.Niot.GUI.MenuState;
 using FirstWave.Niot.Managers;
 using FirstWave.StateMachine.Unity;
-using UnityEngine;
+using FirstWave.Unity.Gui.Controls;
 using System.Linq;
+using UnityEngine;
 
 namespace Assets.Scripts.GUI.MenuState
 {
-	public class TopMenuState : State<MainMenuTrigger>
+    public class TopMenuState : State<MainMenuTrigger>
 	{
 		private const string MENU_LABEL_STATUS = "Status";
 		private const string MENU_LABEL_EQUIP = "Equip";
@@ -32,16 +32,16 @@ namespace Assets.Scripts.GUI.MenuState
 
 			if (menu != null)
 			{
-				menu.textures = textures;
-				menu.fontProperties = fontProperties;
+				//menu.textures = textures;
+				//menu.fontProperties = fontProperties;
 
-				menu.Canceled += Canceled;
-				menu.SelectionChanged += SelectionChanged;
+				//menu.Canceled += Canceled;
+				//menu.SelectionChanged += SelectionChanged;
 
-				menu.AddMenuItem(new MenuItem(MENU_LABEL_STATUS, () => trigger = MainMenuTrigger.StatusSelected));
-				menu.AddMenuItem(new MenuItem(MENU_LABEL_EQUIP, () => { }));
-				menu.AddMenuItem(new MenuItem(MENU_LABEL_ABILITIES, () => { }));
-				menu.AddMenuItem(new MenuItem(MENU_LABEL_ITEMS, () => { }));
+				//menu.AddMenuItem(new MenuItem(MENU_LABEL_STATUS, () => trigger = MainMenuTrigger.StatusSelected));
+				//menu.AddMenuItem(new MenuItem(MENU_LABEL_EQUIP, () => { }));
+				//menu.AddMenuItem(new MenuItem(MENU_LABEL_ABILITIES, () => { }));
+				//menu.AddMenuItem(new MenuItem(MENU_LABEL_ITEMS, () => { }));
 			}			
 
 			if (menuItemDescription != null)
@@ -49,8 +49,8 @@ namespace Assets.Scripts.GUI.MenuState
 				menuItemDescription.textures = textures;
 				menuItemDescription.fontProperties = fontProperties;
 
-				menuItemDescription.margin.left = menu.margin.left;
-				menuItemDescription.margin.top = menu.margin.top + menu.size.y + 20;
+				//menuItemDescription.margin.left = menu.margin.left;
+				//menuItemDescription.margin.top = menu.margin.top + menu.size.y + 20;
 			}
 
 			if (partyGold != null)
@@ -58,8 +58,8 @@ namespace Assets.Scripts.GUI.MenuState
 				partyGold.textures = textures;
 				partyGold.fontProperties = fontProperties;
 
-				partyGold.margin.top = menu.margin.top;
-				partyGold.margin.right = menu.margin.left;
+				//partyGold.margin.top = menu.margin.top;
+				//partyGold.margin.right = menu.margin.left;
 
 				partyGold.text = string.Format("Gold: {0}G", GameStateManager.Instance.GameData.Gold);
 			}
@@ -68,7 +68,7 @@ namespace Assets.Scripts.GUI.MenuState
 		private void SelectionChanged(MenuItem newSelection)
 		{
 			if (menuItemDescription != null)
-				menuItemDescription.text = GetMenuItemDescription(newSelection.Text);
+				menuItemDescription.text = GetMenuItemDescription(newSelection.Label);
 		}
 
 		public override MainMenuTrigger GetTrigger()
@@ -85,8 +85,8 @@ namespace Assets.Scripts.GUI.MenuState
 
 		public override void OnEnter()
 		{
-			menu.enabled = true;
-			menu.DisableInput = false;
+			//menu.enabled = true;
+			//menu.DisableInput = false;
 
 			menuItemDescription.enabled = true;
 			partyGold.enabled = true;
@@ -96,7 +96,7 @@ namespace Assets.Scripts.GUI.MenuState
 
 		public override void OnExit()
 		{
-			menu.DisableInput = true;
+			//menu.DisableInput = true;
 			menuItemDescription.enabled = false;
 			partyGold.enabled = false;
 		}

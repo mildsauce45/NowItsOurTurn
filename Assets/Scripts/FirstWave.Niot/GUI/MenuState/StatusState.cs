@@ -1,14 +1,14 @@
 ﻿using Assets.Scripts.GUI.Controls.MainMenu;
 using FirstWave.Core.GUI;
-using FirstWave.Core.GUI.Menus;
 using FirstWave.Niot.GUI.MenuState;
 using FirstWave.Niot.Managers;
 using FirstWave.StateMachine.Unity;
+using FirstWave.Unity.Gui.Controls;
 using UnityEngine;
 
 namespace Assets.Scripts.GUI.MenuState
 {
-	public class StatusState : State<MainMenuTrigger>
+    public class StatusState : State<MainMenuTrigger>
 	{
 		private MainMenuTrigger? trigger;
 
@@ -27,7 +27,7 @@ namespace Assets.Scripts.GUI.MenuState
 				menu.fontProperties = fontProperties;
 
 				menu.Canceled += Canceled;
-				menu.SelectionChanged += SelectionChanged;
+				//menu.SelectionChanged += SelectionChanged;
 
 				foreach (var pm in GameStateManager.Instance.GameData.Party)
 				{
@@ -36,7 +36,7 @@ namespace Assets.Scripts.GUI.MenuState
 						continue;
 
 					// These never need a click action as the work is done by the selection changed handler
-					menu.AddMenuItem(new MenuItem(partyMember.Name, () => { }));
+					//menu.AddItem(partyMember.Name, () => { }));
 				}
 			}
 

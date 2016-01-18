@@ -1,10 +1,10 @@
-﻿using UnityEngine;
-using System.Collections;
-using FirstWave.Core.GUI;
+﻿using FirstWave.Core.GUI;
+using FirstWave.Unity.Gui.Enums;
+using UnityEngine;
 
 namespace FirstWave.Niot.GUI.Controls
 {
-	public class BorderedLabel : MonoBehaviour
+    public class BorderedLabel : MonoBehaviour
 	{
 		public BorderTextures textures;
 		public FontProperties fontProperties;

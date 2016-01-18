@@ -1,14 +1,14 @@
-﻿using System;
-using System.Linq;
-using FirstWave.Core.GUI;
+﻿using FirstWave.Core.GUI;
 using FirstWave.Niot.Game;
-using UnityEngine;
-using FirstWave.Niot.Managers;
 using FirstWave.Unity.Core.Input;
+using FirstWave.Unity.Gui.Enums;
+using System;
+using System.Linq;
+using UnityEngine;
 
 namespace FirstWave.Niot.GUI.Controls.Battle
 {
-	public class AbilityMenu : MonoBehaviour
+    public class AbilityMenu : MonoBehaviour
 	{
 		public BorderTextures textures;
 		public FontProperties fontProperties;
@@ -177,12 +177,14 @@ namespace FirstWave.Niot.GUI.Controls.Battle
 				}
 				else if (InputManager.Instance.KeyReleased("Interact"))
 				{
-					if (CurrentItem != null && CurrentItem.Ability.CooldownRemaining <= 0)
-						CurrentItem.ClickAction();
-					else
-					{
-						/// TODO: Play a nope sound
-					}
+                    if (CurrentItem != null && CurrentItem.Ability.CooldownRemaining <= 0)
+                    {
+                        //CurrentItem.ClickAction();
+                    }
+                    else
+                    {
+                        /// TODO: Play a nope sound
+                    }
 
 					inputTimer.Reset();
 				}

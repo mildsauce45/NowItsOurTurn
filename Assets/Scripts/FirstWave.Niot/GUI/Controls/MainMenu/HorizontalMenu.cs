@@ -1,16 +1,15 @@
 ﻿using FirstWave.Core.GUI;
+using FirstWave.Unity.Core.Input;
+using FirstWave.Unity.Gui.Controls;
+using FirstWave.Unity.Gui.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using UnityEngine;
-using FirstWave.Core.GUI.Menus;
-using FirstWave.Niot.Managers;
-using FirstWave.Unity.Core.Input;
 
 namespace Assets.Scripts.GUI.Controls.MainMenu
 {
-	public class HorizontalMenu : MonoBehaviour
+    public class HorizontalMenu : MonoBehaviour
 	{
 		#region Inspector Properties
 
@@ -34,7 +33,7 @@ namespace Assets.Scripts.GUI.Controls.MainMenu
 		#endregion
 
 		public event EventHandler Canceled;
-		public event Menu.SelectionChangedHandler SelectionChanged;
+		//public event Menu.SelectionChangedHandler SelectionChanged;
 
 		public int SelectedIndex
 		{
@@ -66,7 +65,7 @@ namespace Assets.Scripts.GUI.Controls.MainMenu
 			{
 				if (inputManager.KeyReleased("Interact"))
 				{
-					menuItems[currentOption].ClickAction();
+					//menuItems[currentOption].ClickAction();
 
 					inputTimer.Reset();
 				}
@@ -117,7 +116,7 @@ namespace Assets.Scripts.GUI.Controls.MainMenu
 
 			foreach (var mi in menuItems)
 			{
-				var itemContent = new GUIContent(mi.Text);
+				var itemContent = new GUIContent(mi.Label);
 				var textSize = style.CalcSize(itemContent);
 
 				UnityEngine.GUI.Label(new Rect(itemX, itemY, textSize.x, textSize.y), itemContent, style);
@@ -163,7 +162,7 @@ namespace Assets.Scripts.GUI.Controls.MainMenu
 			float size = 0;
 
 			foreach (var mi in menuItems)
-				size += style.CalcSize(new GUIContent(mi.Text)).x;
+				size += style.CalcSize(new GUIContent(mi.Label)).x;
 			
 			return size;
 		}
@@ -214,8 +213,8 @@ namespace Assets.Scripts.GUI.Controls.MainMenu
 
 		private void SafeRaiseSelectionChanged()
 		{
-			if (SelectionChanged != null && currentOption > -1 && currentOption < menuItems.Count)
-				SelectionChanged(menuItems[currentOption]);
+			//if (SelectionChanged != null && currentOption > -1 && currentOption < menuItems.Count)
+			//	SelectionChanged(menuItems[currentOption]);
 		}
 
 		#endregion

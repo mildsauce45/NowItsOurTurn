@@ -1,9 +1,9 @@
-﻿using System;
+﻿using FirstWave.Unity.Gui.Enums;
 using UnityEngine;
 
 namespace FirstWave.Core.GUI
 {
-	public class MessageBox : MonoBehaviour
+    public class MessageBox : MonoBehaviour
 	{
 		#region Designable Properties
 

@@ -1,8 +1,8 @@
 ﻿using System.Linq;
-using FirstWave.Core.GUI.Menus;
 using FirstWave.StateMachine.Unity;
 using UnityEngine;
 using FirstWave.Niot.Game;
+using FirstWave.Unity.Gui.Controls;
 
 namespace FirstWave.Niot.Battle.PartyInput
 {
@@ -28,24 +28,24 @@ namespace FirstWave.Niot.Battle.PartyInput
 		{
 			this.enemies = TurnBasedBattleManager.Instance.EnemyParty;
 
-			this.menu = owner.GetComponentsInChildren<Menu>().FirstOrDefault(m => m.gameObject.name == "EnemyMenu");
-			this.actionMenu = this.Owner.GetComponentsInChildren<Menu>().FirstOrDefault(m => m.gameObject.name == "ActionMenu");
+			//this.menu = owner.GetComponentsInChildren<Menu>().FirstOrDefault(m => m.gameObject.name == "EnemyMenu");
+			//this.actionMenu = this.Owner.GetComponentsInChildren<Menu>().FirstOrDefault(m => m.gameObject.name == "ActionMenu");
 
 			if (menu != null)
 			{
-				this.menu.Canceled += Canceled;
-				this.menuItems = new MenuItem[enemies.Length];
+				//this.menu.Canceled += Canceled;
+				//this.menuItems = new MenuItem[enemies.Length];
 
-				for (int i = 0; i < enemies.Length; i++)
-				{
-					int closureIndex = i;
+				//for (int i = 0; i < enemies.Length; i++)
+				//{
+				//	int closureIndex = i;
 
-					var mi = new MenuItem(enemies[i].Name, () => EnemySelected(closureIndex));
+				//	var mi = new MenuItem(enemies[i].Name, () => EnemySelected(closureIndex));
 
-					menuItems[i] = mi;
+				//	menuItems[i] = mi;
 
-					this.menu.AddMenuItem(mi);
-				}
+				//	this.menu.AddMenuItem(mi);
+				//}
 			}
 		}
 
@@ -69,26 +69,26 @@ namespace FirstWave.Niot.Battle.PartyInput
 			
 			SelectedIndex = -1;
 
-			this.menu.enabled = true;
+			//this.menu.enabled = true;
 
 			// Freeze the action menu, but still let it draw itself
-			actionMenu.DisableInput = true;
+			//actionMenu.DisableInput = true;
 
 			// Now update the menu items rendering capabilities
-			for (int i = 0; i < menuItems.Length; i++)
-				menuItems[i].ShouldRender = !enemies[i].IsDead;
+			//for (int i = 0; i < menuItems.Length; i++)
+				//menuItems[i].ShouldRender = !enemies[i].IsDead;
 		}
 
 		public override void OnExit()
 		{
-			this.menu.enabled = false;
+			//this.menu.enabled = false;
 		}
 
 		private void EnemySelected(int index)
 		{			
 			SelectedIndex = index;
 
-			this.menu.SetSelectedIndex(0);
+			//this.menu.SetSelectedIndex(0);
 		}
 
 		private void Canceled(object sender, System.EventArgs e)

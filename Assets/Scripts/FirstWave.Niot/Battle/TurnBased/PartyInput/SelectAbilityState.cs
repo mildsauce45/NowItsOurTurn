@@ -2,9 +2,9 @@ using UnityEngine;
 using System.Collections;
 using FirstWave.StateMachine.Unity;
 using FirstWave.Niot.Game;
-using FirstWave.Core.GUI.Menus;
 using System.Linq;
 using FirstWave.Niot.GUI.Controls.Battle;
+using FirstWave.Unity.Gui.Controls;
 
 namespace FirstWave.Niot.Battle.PartyInput
 {
@@ -24,7 +24,7 @@ namespace FirstWave.Niot.Battle.PartyInput
 		{
 			party = TurnBasedBattleManager.Instance.Party;
 
-			actionMenu = owner.GetComponentsInChildren<Menu>().FirstOrDefault(m => m.name == "ActionMenu");
+			//actionMenu = owner.GetComponentsInChildren<Menu>().FirstOrDefault(m => m.name == "ActionMenu");
 			abilityMenu = owner.GetComponentInChildren<AbilityMenu>();
 
 			abilityMenu.Canceled += AbilityCanceled;
@@ -56,7 +56,7 @@ namespace FirstWave.Niot.Battle.PartyInput
 
 		public override void OnEnter()
 		{
-			actionMenu.DisableInput = true;
+			//actionMenu.DisableInput = true;
 			abilityMenu.enabled = true;
 			isCanceled = false;
 
@@ -65,7 +65,7 @@ namespace FirstWave.Niot.Battle.PartyInput
 
 		public override void OnExit()
 		{
-			actionMenu.DisableInput = false;
+			//actionMenu.DisableInput = false;
 			abilityMenu.enabled = false;
 		}
 

@@ -1,7 +1,7 @@
-﻿using FirstWave.Core.GUI.Menus;
-using FirstWave.Niot.Game;
+﻿using FirstWave.Niot.Game;
 using FirstWave.Niot.Game.Data;
 using FirstWave.Niot.Managers;
+using FirstWave.Unity.Gui.Controls;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -24,11 +24,11 @@ namespace FirstWave.Niot.GameStart
 				if (data != null)
 				{
 					int closureIndex = i;
-					menu.AddMenuItem(new MenuItem(string.Format("{0} - Lvl. {1}", data.Party[0].Name, data.Party[0].Level), () => ContinueGame(closureIndex)));
+					menu.AddItem(string.Format("{0} - Lvl. {1}", data.Party[0].Name, data.Party[0].Level), () => ContinueGame(closureIndex));
 				}
 				else
 				{
-					menu.AddMenuItem(new MenuItem("-", () => { }));
+					menu.AddItem("-", () => { });
 				}
 			}
 		}

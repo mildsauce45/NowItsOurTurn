@@ -56,14 +56,11 @@
     <Compile Include="Assets\Scripts\FirstWave.Core\Extensions\GameObjectExtensions.cs" />
     <Compile Include="Assets\Scripts\FirstWave.Core\Extensions\StringExtensions.cs" />
     <Compile Include="Assets\Scripts\FirstWave.Core\Extensions\XmlNodeExtensions.cs" />
-    <Compile Include="Assets\Scripts\FirstWave.Core\GUI\Alignments.cs" />
     <Compile Include="Assets\Scripts\FirstWave.Core\GUI\BorderBox.cs" />
     <Compile Include="Assets\Scripts\FirstWave.Core\GUI\BorderTextures.cs" />
     <Compile Include="Assets\Scripts\FirstWave.Core\GUI\FontProperties.cs" />
     <Compile Include="Assets\Scripts\FirstWave.Core\GUI\GUIManager.cs" />
     <Compile Include="Assets\Scripts\FirstWave.Core\GUI\InputTimer.cs" />
-    <Compile Include="Assets\Scripts\FirstWave.Core\GUI\Menus\Menu.cs" />
-    <Compile Include="Assets\Scripts\FirstWave.Core\GUI\Menus\MenuItem.cs" />
     <Compile Include="Assets\Scripts\FirstWave.Core\GUI\MessageBox.cs" />
     <Compile Include="Assets\Scripts\FirstWave.Core\GUI\Thickness.cs" />
     <Compile Include="Assets\Scripts\FirstWave.Core\ITextSource.cs" />

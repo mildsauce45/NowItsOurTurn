@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using FirstWave.Core.GUI;
-using FirstWave.Core.GUI.Menus;
 using FirstWave.StateMachine.Unity;
 using UnityEngine;
+using FirstWave.Unity.Gui.Controls;
 
 namespace FirstWave.Niot.Battle.PartyInput
 {
@@ -18,16 +18,16 @@ namespace FirstWave.Niot.Battle.PartyInput
 		public SelectActionState(GameObject owner)
 			: base(owner)
 		{
-			this.menu = owner.GetComponentsInChildren<Menu>().FirstOrDefault(m => m.gameObject.name == "ActionMenu");
+			//this.menu = owner.GetComponentsInChildren<Menu>().FirstOrDefault(m => m.gameObject.name == "ActionMenu");
 
 			if (this.menu != null)
 			{
-				this.menu.Canceled += Canceled;
+				//this.menu.Canceled += Canceled;
 
-				this.menu.AddMenuItem(new MenuItem("Attack", AttackSelected));
-				this.menu.AddMenuItem(new MenuItem("Ability", AbilitySelected));
-				this.menu.AddMenuItem(new MenuItem("Defend", () => { }));
-				this.menu.AddMenuItem(new MenuItem("Flee", () => { }));
+				//this.menu.AddMenuItem(new MenuItem("Attack", AttackSelected));
+				//this.menu.AddMenuItem(new MenuItem("Ability", AbilitySelected));
+				//this.menu.AddMenuItem(new MenuItem("Defend", () => { }));
+				//this.menu.AddMenuItem(new MenuItem("Flee", () => { }));
 			}
 
 			this.placeholder = owner.GetComponentInChildren<MessageBox>();
@@ -55,8 +55,8 @@ namespace FirstWave.Niot.Battle.PartyInput
 			IsAttack = false;
 			IsAbility = false;
 
-			menu.enabled = true;
-			menu.DisableInput = false;
+			//menu.enabled = true;
+			//menu.DisableInput = false;
 
 			placeholder.enabled = true;
 		}
