@@ -62,7 +62,7 @@ namespace FirstWave.Niot.GUI.Controls.Battle
 				return;
 
 			if (abilityArray == null)
-				abilityArray = new AbilityMenuItem[Constants.Ranges.STANDARD_ABILITY_SIZE + Constants.Ranges.FINISHER_ABILITY_SIZE];
+				abilityArray = new AbilityMenuItem[GameConstants.Ranges.STANDARD_ABILITY_SIZE + GameConstants.Ranges.FINISHER_ABILITY_SIZE];
 
 			int beginningIndex = menuItem.Ability.IsFinisher ? 4 : 0;
 

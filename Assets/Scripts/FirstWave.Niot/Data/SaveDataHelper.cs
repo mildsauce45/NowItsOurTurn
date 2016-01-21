@@ -22,7 +22,7 @@ namespace FirstWave.Niot.Game.Data
 			get { return SavedGameData.Any(gd => gd != null); }
 		}
 
-		private static GameData[] SavedGameData = new GameData[Constants.Ranges.NUM_OF_GAME_SAVES];
+		private static GameData[] SavedGameData = new GameData[GameConstants.Ranges.NUM_OF_GAME_SAVES];
 		private static int SaveGameIndex = -1;		
 
 		public static bool SaveDataExists()

@@ -44,8 +44,8 @@
 		{
 			AllAbilities = new Ability[20];
 
-			EquippedAbilities = new Ability[Constants.Ranges.STANDARD_ABILITY_SIZE];
-			EquippedFinishers = new Ability[Constants.Ranges.FINISHER_ABILITY_SIZE];
+			EquippedAbilities = new Ability[GameConstants.Ranges.STANDARD_ABILITY_SIZE];
+			EquippedFinishers = new Ability[GameConstants.Ranges.FINISHER_ABILITY_SIZE];
 		}
 
 		public Player(string name, int maxHP)

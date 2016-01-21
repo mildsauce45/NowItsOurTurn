@@ -172,7 +172,7 @@ public class TurnBasedBattleManager : Singleton<TurnBasedBattleManager>
 				enemies[i] = EnemyManager.Instance.GetEnemy(Random.Range(0, 3));
 		}
 
-		FieldEffect = new ElementType[Constants.Ranges.FIELD_EFFECT_SIZE];
+		FieldEffect = new ElementType[GameConstants.Ranges.FIELD_EFFECT_SIZE];
 
 		for (int i = 0; i < FieldEffect.Length; i++)
 			FieldEffect[i] = ElementType.None;

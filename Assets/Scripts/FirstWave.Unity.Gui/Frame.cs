@@ -1,4 +1,5 @@
-﻿using FirstWave.Unity.Core.Input;
+﻿using FirstWave.Messaging;
+using FirstWave.Unity.Core.Input;
 using FirstWave.Unity.Gui.Panels;
 using FirstWave.Unity.Gui.Utilities;
 using System.Collections.Generic;
@@ -18,12 +19,26 @@ namespace FirstWave.Unity.Gui
         void Awake()
         {
             panels = new List<Panel>();
+
             inputManager = FindObjectOfType<InputManager>();
+
+            // If there isn't an input manager in the scene create one as it's a safesingleton
+            if (!inputManager)
+                inputManager = InputManager.Instance;
+
+            DontDestroyOnLoad(gameObject);
+
+            Messenger.Default.Register(this, Constants.INVALIDATE, InvalidateLayout);
         }
 
         public void AddPanel(Panel panel)
         {
             panels.Add(panel);
+        }
+
+        public void Clear()
+        {
+            panels.Clear();
         }
 
         private void CheckInput()
@@ -46,6 +61,12 @@ namespace FirstWave.Unity.Gui
             }
         }
 
+        private void InvalidateLayout()
+        {
+            foreach (var p in panels)
+                p.InvalidateLayout();
+        }
+
         #region Unity Engine
 
         void Update()
@@ -65,6 +86,16 @@ namespace FirstWave.Unity.Gui
         {
             foreach (var p in panels)
                 p.Draw();
+        }
+
+        void OnLevelWasLoaded()
+        {
+            panels.Clear();
+        }
+
+        void OnDestroy()
+        {
+            Messenger.Default.Unregister(this);
         }
 
         #endregion

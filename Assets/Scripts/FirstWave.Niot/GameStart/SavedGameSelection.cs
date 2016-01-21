@@ -18,7 +18,7 @@ namespace FirstWave.Niot.GameStart
 			if (!SaveDataHelper.DataLoaded)
 				SaveDataHelper.ReadGameData();
 
-			for (int i = 0; i < Constants.Ranges.NUM_OF_GAME_SAVES; i++)
+			for (int i = 0; i < GameConstants.Ranges.NUM_OF_GAME_SAVES; i++)
 			{
 				var data = SaveDataHelper.GetGameData(i);
 				if (data != null)

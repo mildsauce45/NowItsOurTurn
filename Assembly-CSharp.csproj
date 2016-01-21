@@ -71,6 +71,8 @@
     <Compile Include="Assets\Scripts\FirstWave.Core\Tuple.cs" />
     <Compile Include="Assets\Scripts\FirstWave.Core\Utilities\Maybe.cs" />
     <Compile Include="Assets\Scripts\FirstWave.Core\Utilities\SafeSingleton.cs" />
+    <Compile Include="Assets\Scripts\FirstWave.Messaging\Messenger.cs" />
+    <Compile Include="Assets\Scripts\FirstWave.Messaging\WeakAction.cs" />
     <Compile Include="Assets\Scripts\FirstWave.Niot\AbilitiesDatabase.cs" />
     <Compile Include="Assets\Scripts\FirstWave.Niot\Ability.cs" />
     <Compile Include="Assets\Scripts\FirstWave.Niot\Armor.cs" />
@@ -103,7 +105,7 @@
     <Compile Include="Assets\Scripts\FirstWave.Niot\Behaviors\KillTheWeakestBehavior.cs" />
     <Compile Include="Assets\Scripts\FirstWave.Niot\Behaviors\RimuldarGeneralBehavior.cs" />
     <Compile Include="Assets\Scripts\FirstWave.Niot\Combatant.cs" />
-    <Compile Include="Assets\Scripts\FirstWave.Niot\Constants.cs" />
+    <Compile Include="Assets\Scripts\FirstWave.Niot\GameConstants.cs" />
     <Compile Include="Assets\Scripts\FirstWave.Niot\Controllers\TileBoatController.cs" />
     <Compile Include="Assets\Scripts\FirstWave.Niot\Controllers\TiledHeroController.cs" />
     <Compile Include="Assets\Scripts\FirstWave.Niot\Data\GameData.cs" />
@@ -179,6 +181,7 @@
     <Compile Include="Assets\Scripts\FirstWave.Unity.Gui\BorderTextures.cs" />
     <Compile Include="Assets\Scripts\FirstWave.Unity.Gui\Bridge\IResourceLoader.cs" />
     <Compile Include="Assets\Scripts\FirstWave.Unity.Gui\Bridge\TextureResourceLoader.cs" />
+    <Compile Include="Assets\Scripts\FirstWave.Unity.Gui\Constants.cs" />
     <Compile Include="Assets\Scripts\FirstWave.Unity.Gui\ContentControl.cs" />
     <Compile Include="Assets\Scripts\FirstWave.Unity.Gui\Control.cs" />
     <Compile Include="Assets\Scripts\FirstWave.Unity.Gui\Controls\Menu.cs" />
