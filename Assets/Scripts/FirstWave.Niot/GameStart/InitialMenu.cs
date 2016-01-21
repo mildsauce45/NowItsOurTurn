@@ -52,7 +52,7 @@ namespace FirstWave.Game.GameStart
 		{
 			GameStateManager.Instance.GameData = SaveDataHelper.StartNewGame();
 
-			//Application.LoadLevel("ThroneRoomFloor");
+            //SceneManager.LoadScene("ThroneRoomFloor");
 
 			// For the demo
 			SceneManager.LoadScene("DemoOverworld");
@@ -131,6 +131,14 @@ namespace FirstWave.Game.GameStart
                     menu.AddItem("-", () => { });
                 }
             }
+
+            var sp = new StackPanel();
+            sp.HorizontalAlignment = HorizontalAlignment.Center;
+            sp.VerticalAlignment = VerticalAlignment.Center;
+
+            sp.AddChild(menu);
+
+            frame.AddPanel(sp);
         }
 	}
 }
